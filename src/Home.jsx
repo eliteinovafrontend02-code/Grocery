@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ShoppingCart,Carrot,UtensilsCrossed,Nut,Milk,ChevronRight,ChevronLeft,Star,Heart,Truck,RotateCcw,Lock,BadgePercent,Headphones,Leaf,
 } from "lucide-react";
 
 export default function Home() {
+
+  const navigate = useNavigate();
   // Data
   const BANNERS = [
     {
@@ -185,8 +188,8 @@ export default function Home() {
 
   // Navigation handler
   const handleCategoryClick = (link) => {
-    window.location.href = link;
-  };
+  navigate(link);
+};
 
   return (
     <div className="min-h-screen w-full bg-[#fdfcf9]">
