@@ -41,10 +41,10 @@ import {
   AlertCircle,
   Trash2,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { products, categories, getProductsByCategory } from "../data/FreshProductsData";
 
-// Custom Fruit & Vegetable SVG Icons (keep all your existing icons)
+// Custom Fruit & Vegetable SVG Icons
 const AppleIcon = ({ className, style }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 20a7 7 0 0 1-7-7c0-2.5 1.5-5.5 4-7 1.2-.7 2.5-1 3-1 .5 0 1.8.3 3 1 2.5 1.5 4 4.5 4 7a7 7 0 0 1-7 7z" />
@@ -269,6 +269,7 @@ const MangoIcon = ({ className, style }) => (
 
 const FreshProducts = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [viewMode, setViewMode] = useState("grid");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("popular");
@@ -293,6 +294,10 @@ const FreshProducts = () => {
   const [isAutoSliding, setIsAutoSliding] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const autoSlideTimerRef = useRef(null);
+
+  // Ref for scroll restoration
+  const scrollPositionRef = useRef(0);
+  const mainContainerRef = useRef(null);
 
   // Banner Data
   const BANNERS = [
@@ -340,7 +345,9 @@ const FreshProducts = () => {
     if (savedCart) {
       try {
         const parsedCart = JSON.parse(savedCart);
-        setCart(parsedCart);
+        if (Array.isArray(parsedCart) && parsedCart.length > 0) {
+          setCart(parsedCart);
+        }
       } catch (e) {
         console.error('Error loading cart:', e);
       }
@@ -357,18 +364,73 @@ const FreshProducts = () => {
 
   // Update cart totals
   useEffect(() => {
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const total = cart.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 0), 0);
+    const count = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
     setCartTotal(total);
     setCartCount(count);
   }, [cart]);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    if (cart.length > 0) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    } else {
+      localStorage.removeItem('cart');
+    }
   }, [cart]);
 
- 
+  // ===== SCROLL RESTORATION =====
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      scrollPositionRef.current = window.scrollY;
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        scrollPositionRef.current = window.scrollY;
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const restoreScroll = () => {
+      if (scrollPositionRef.current > 0) {
+        window.scrollTo({
+          top: scrollPositionRef.current,
+          behavior: 'instant'
+        });
+        scrollPositionRef.current = 0;
+      }
+    };
+
+    restoreScroll();
+    const timer = setTimeout(restoreScroll, 100);
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+  const handleNavigate = (path) => {
+    scrollPositionRef.current = window.scrollY;
+    navigate(path);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!isModalOpen) {
+        scrollPositionRef.current = window.scrollY;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isModalOpen]);
 
   const goToBanner = (index) => {
     setBannerIndex(index);
@@ -409,14 +471,13 @@ const FreshProducts = () => {
       } else {
         newCart = [...prevCart, { ...product, quantity: qty }];
       }
-      localStorage.setItem('cart', JSON.stringify(newCart));
       return newCart;
     });
     setJustAddedProductId(product.id);
     setModalJustAdded(true);
   };
 
-  // Get product images (handle both array and string)
+  // Get product images
   const getProductImages = (product) => {
     if (!product) return [];
     if (Array.isArray(product.image)) {
@@ -459,14 +520,13 @@ const FreshProducts = () => {
   const handleAddToCart = () => {
     if (selectedProduct && selectedProduct.inStock) {
       addToCart(selectedProduct, quantity);
-      // Don't close modal
     }
   };
 
   const handleBuyNow = () => {
     if (selectedProduct && selectedProduct.inStock) {
       addToCart(selectedProduct, quantity);
-      navigate('/cart');
+      handleNavigate('/cart');
     }
   };
 
@@ -505,7 +565,6 @@ const FreshProducts = () => {
     }
   };
 
-  // Auto slide images in modal
   useEffect(() => {
     if (isModalOpen && selectedProduct && isAutoSliding) {
       const images = getProductImages(selectedProduct);
@@ -523,12 +582,10 @@ const FreshProducts = () => {
     };
   }, [isModalOpen, selectedProduct, isAutoSliding]);
 
-  // Reset image index when product changes
   useEffect(() => {
     setCurrentImageIndex(0);
   }, [selectedProduct]);
 
-  // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isModalOpen) return;
@@ -546,7 +603,6 @@ const FreshProducts = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isModalOpen, isFullScreen]);
 
-  // Handle double click for full screen
   const handleImageDoubleClick = () => {
     toggleFullScreen();
   };
@@ -628,7 +684,6 @@ const FreshProducts = () => {
                   }`}
                 />
                 
-                {/* Badges - Left side */}
                 <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
                   {selectedProduct.discount > 0 && (
                     <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg animate-pulse-slow">
@@ -642,7 +697,6 @@ const FreshProducts = () => {
                   )}
                 </div>
 
-                {/* Wishlist Heart - Top Right on Image in Modal */}
                 <button 
                   onClick={(e) => {
                     e.stopPropagation();
@@ -768,19 +822,57 @@ const FreshProducts = () => {
                     </p>
                   )}
 
-                  <div className="flex items-baseline gap-3 bg-gradient-to-r from-emerald-50 to-orange-50 p-4 rounded-2xl">
-                    <span className="text-3xl font-bold text-emerald-700">
-                      ₹{selectedProduct.price}
-                    </span>
-                    {selectedProduct.originalPrice && (
-                      <span className="text-sm text-gray-400 line-through">
-                        ₹{selectedProduct.originalPrice}
-                      </span>
-                    )}
+                  {/* ====== CREATIVE PRICE DISPLAY ====== */}
+                  <div className="bg-gradient-to-r from-emerald-50 to-orange-50 p-4 rounded-2xl border border-emerald-100/50">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-bold text-emerald-700">
+                          ₹{selectedProduct.price}
+                        </span>
+                        <span className="text-sm text-gray-500 font-medium">/{selectedProduct.unit}</span>
+                      </div>
+                      {selectedProduct.discount > 0 && (
+                        <div className="flex items-center gap-1 bg-red-500/10 px-3 py-1 rounded-full border border-red-200">
+                          <span className="text-xs font-bold text-red-500">{selectedProduct.discount}% OFF</span>
+                          <span className="text-xs text-red-400">🔥</span>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="flex items-center gap-3 mt-1">
+                      {selectedProduct.originalPrice && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-gray-400 line-through decoration-red-400 decoration-2">
+                            ₹{selectedProduct.originalPrice}
+                          </span>
+                          <span className="text-xs text-gray-400">/{selectedProduct.unit}</span>
+                        </div>
+                      )}
+                      {selectedProduct.discount > 0 && selectedProduct.originalPrice && (
+                        <div className="flex items-center gap-1 bg-gradient-to-r from-emerald-500 to-green-500 px-3 py-1 rounded-full shadow-sm">
+                          <span className="text-xs font-bold text-white">Save ₹{selectedProduct.originalPrice - selectedProduct.price}</span>
+                        </div>
+                      )}
+                    </div>
+                    
                     {selectedProduct.discount > 0 && selectedProduct.originalPrice && (
-                      <span className="text-sm font-bold text-red-500 bg-red-50 px-2 py-1 rounded-full">
-                        Save ₹{selectedProduct.originalPrice - selectedProduct.price}
-                      </span>
+                      <div className="mt-2">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-emerald-600 font-medium">You Save</span>
+                          <span className="text-emerald-700 font-bold">₹{selectedProduct.originalPrice - selectedProduct.price}</span>
+                        </div>
+                        <div className="mt-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full"
+                            style={{ width: `${Math.round((selectedProduct.discount / 100) * 100)}%` }}
+                          />
+                        </div>
+                        <div className="flex justify-between text-[10px] text-gray-400 mt-0.5">
+                          <span>MRP: ₹{selectedProduct.originalPrice}</span>
+                          <span>Discount: {selectedProduct.discount}%</span>
+                          <span>You Pay: ₹{selectedProduct.price}</span>
+                        </div>
+                      </div>
                     )}
                   </div>
 
@@ -813,15 +905,15 @@ const FreshProducts = () => {
                     </span>
                   </div>
 
-                  {/* Action Buttons - Add to Cart & Buy Now on same line */}
+                  {/* ====== UPDATED ACTION BUTTONS ====== */}
                   <div className="flex gap-3 pt-2">
                     {modalJustAdded ? (
                       <button
-                        onClick={() => navigate('/cart')}
-                        className="flex-1 py-3.5 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-105 active:scale-95"
+                        onClick={() => handleNavigate('/cart')}
+                        className="flex-1 py-3.5 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-orange-400 to-red-400 text-white shadow-lg shadow-orange-200 hover:shadow-xl hover:scale-105 active:scale-95 hover:from-orange-600 hover:to-red-600 "
                       >
                         <ShoppingCart className="w-5 h-5" />
-                        Go to Cart
+                        Go to Cart 🛒
                       </button>
                     ) : (
                       <button
@@ -829,12 +921,12 @@ const FreshProducts = () => {
                         disabled={!selectedProduct.inStock}
                         className={`flex-1 py-3.5 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                           selectedProduct.inStock
-                            ? 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-105 active:scale-95'
+                            ?'bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg shadow-orange-200 hover:shadow-xl hover:scale-105 active:scale-95 hover:from-orange-600 hover:to-red-600  group'
                             : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                         }`}
                       >
-                        <ShoppingCart className="w-5 h-5" />
-                        Add to Cart
+                        <ShoppingCart className={`w-5 h-5 ${selectedProduct.inStock ? 'group-hover:scale-110 group-hover:rotate-12 transition-all duration-300' : ''}`} />
+                        <span>Add to Cart</span>
                       </button>
                     )}
                     
@@ -843,16 +935,16 @@ const FreshProducts = () => {
                       disabled={!selectedProduct.inStock}
                       className={`flex-1 py-3.5 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                         selectedProduct.inStock
-                          ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg shadow-orange-200 hover:shadow-xl hover:scale-105 active:scale-95 animate-pulse-slow'
+                          ? 'bg-gradient-to-r from-emerald-500 to-emerald-700 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-105 active:scale-95 hover:from-emerald-600 hover:to-emerald-800 animate-pulse-slow group'
                           : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                       }`}
                     >
-                      <Zap className="w-5 h-5" />
-                      Buy Now
+                      <Zap className={`w-5 h-5 ${selectedProduct.inStock ? 'group-hover:scale-110 group-hover:rotate-12 transition-all duration-300' : ''}`} />
+                      <span>Buy Now</span>
+                      
                     </button>
                   </div>
 
-                  {/* Success Message */}
                   {modalJustAdded && (
                     <div className="bg-green-50 border border-green-200 rounded-xl p-3 flex items-center gap-2 animate-fade-in">
                       <CheckCircle className="w-5 h-5 text-green-600" />
@@ -907,11 +999,11 @@ const FreshProducts = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#fdfcf9]">
+    <div className="min-h-screen w-full bg-[#fdfcf9]" ref={mainContainerRef}>
      
-      {/* Floating Cart Button - Navigates to Cart Page */}
+      {/* Floating Cart Button */}
       <button
-        onClick={() => navigate('/cart')}
+        onClick={() => handleNavigate('/cart')}
         className="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white p-4 rounded-full shadow-2xl hover:shadow-xl hover:scale-110 transition-all duration-300 group"
       >
         <div className="relative">
@@ -924,6 +1016,7 @@ const FreshProducts = () => {
         </div>
       </button>
 
+      {/* Banner Section */}
       <section className="w-full px-4 sm:px-6 lg:px-8 pt-2">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-60 via-[#fdf6f0] to-green-80/50 transition-colors duration-700 w-full h-[260px] sm:h-[300px] md:h-[340px] lg:h-[380px]">
           <div className="absolute inset-0 bg-gradient-to-br from-orange-100/20 via-transparent to-green-100/20 animate-gradient-shift"></div>
@@ -1022,6 +1115,7 @@ const FreshProducts = () => {
         </div>
       </section>
 
+      {/* Features Section */}
       <section className="w-full px-4 sm:px-6 lg:px-8 mt-6 mb-8">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
@@ -1049,6 +1143,7 @@ const FreshProducts = () => {
         </div>
       </section>
 
+      {/* Breadcrumb */}
       <div className="max-w-auto mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2 text-sm py-4 animate-slide-up">
           <span className="text-orange-400 hover:text-emerald-500 cursor-pointer transition-all duration-300 hover:translate-x-1 hover:scale-105">Home</span>
@@ -1060,8 +1155,10 @@ const FreshProducts = () => {
         </div>
       </div>
 
+      {/* Products Section */}
       <div className="max-w-auto mx-auto px-4 sm:px-6 lg:px-8 py-6 bg-gradient-to-b from-orange-50 to-orange-100">
         
+        {/* Categories */}
         <div className="relative mb-8">
           <div className="flex items-center gap-3 overflow-x-auto pb-4 scrollbar-hide">
             {categories.map((cat, index) => (
@@ -1096,6 +1193,7 @@ const FreshProducts = () => {
           <div className="absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-gray-50 to-transparent pointer-events-none"></div>
         </div>
 
+        {/* Sort & Filter */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 p-4 bg-white/60 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-sm animate-slide-up hover:shadow-md transition-shadow duration-300">
           <p className="text-sm text-gray-600 animate-slide-up">
             Showing <span className="font-bold text-emerald-700 text-base animate-pulse-slow">{sortedProducts.length}</span> premium products
@@ -1141,6 +1239,7 @@ const FreshProducts = () => {
           </div>
         </div>
 
+        {/* Products Grid/List */}
         <div className={`grid ${
           viewMode === "grid" 
             ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" 
@@ -1176,7 +1275,6 @@ const FreshProducts = () => {
                         </span>
                       )}
 
-                      {/* Wishlist Heart - Top Right on Image in Grid View */}
                       <button 
                         onClick={(e) => {
                           e.stopPropagation();
@@ -1232,26 +1330,38 @@ const FreshProducts = () => {
                         <span className="text-xs text-gray-400 ml-1 group-hover:text-emerald-500 transition-colors duration-300">({product.reviews})</span>
                       </div>
 
+                      {/* ====== GRID VIEW PRICE DISPLAY ====== */}
                       <div className="flex items-center justify-between">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-xl font-bold text-emerald-700 group-hover:scale-110 transition-transform duration-300 inline-block">
-                            ₹{product.price}
-                          </span>
-                          {product.originalPrice && (
-                            <span className="text-xs text-gray-400 line-through group-hover:text-red-400 transition-colors duration-300">
-                              ₹{product.originalPrice}
+                        <div className="flex flex-col">
+                          <div className="flex items-baseline gap-1.5">
+                            <span className="text-xl font-bold text-emerald-700 group-hover:scale-110 transition-transform duration-300 inline-block">
+                              ₹{product.price}
                             </span>
+                            <span className="text-xs text-gray-400">/{product.unit}</span>
+                          </div>
+                          {product.originalPrice && (
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-xs text-gray-400 line-through decoration-red-400">
+                                ₹{product.originalPrice}
+                              </span>
+                              {product.discount > 0 && (
+                                <span className="text-[10px] font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded-full">
+                                  {product.discount}% OFF
+                                </span>
+                              )}
+                            </div>
                           )}
                         </div>
+                        
                         {justAddedProductId === product.id ? (
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              navigate('/cart');
+                              handleNavigate('/cart');
                             }}
-                            className="p-2.5 rounded-xl transition-all duration-300 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-110"
+                            className="p-2.5 rounded-xl transition-all duration-300 bg-gradient-to-r from-emerald-500 to-emerald-700 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-110 group"
                           >
-                            <ShoppingCart className="w-4 h-4" />
+                            <ShoppingCart className="w-4 h-4 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
                           </button>
                         ) : (
                           <button
@@ -1263,12 +1373,12 @@ const FreshProducts = () => {
                             }}
                             className={`p-2.5 rounded-xl transition-all duration-300 ${
                               product.inStock 
-                                ? "bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-110 hover:rotate-3 hover:animate-bounce-slow" 
+                                ? "bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-110 hover:rotate-3 group" 
                                 : "bg-gray-100 text-gray-400 cursor-not-allowed"
                             }`}
                             disabled={!product.inStock}
                           >
-                            <ShoppingCart className="w-4 h-4" />
+                            <ShoppingCart className={`w-4 h-4 ${product.inStock ? 'group-hover:scale-110 group-hover:rotate-12 transition-all duration-300' : ''}`} />
                           </button>
                         )}
                       </div>
@@ -1296,7 +1406,6 @@ const FreshProducts = () => {
                           {product.discount}% OFF
                         </span>
                       )}
-                      {/* Wishlist Heart - Top Right on Image in List View */}
                       <button 
                         onClick={(e) => {
                           e.stopPropagation();
@@ -1328,6 +1437,8 @@ const FreshProducts = () => {
                           <span className="text-xs text-gray-500 group-hover:text-emerald-500 transition-colors duration-300">📍 {product.origin}</span>
                         </div>
                       </div>
+                      
+                      {/* ====== LIST VIEW PRICE DISPLAY ====== */}
                       <div className="text-right">
                         <div className="flex items-baseline gap-2 justify-end">
                           <span className="text-2xl font-bold text-emerald-700 group-hover:scale-110 transition-transform duration-300 inline-block">
@@ -1336,7 +1447,21 @@ const FreshProducts = () => {
                           <span className="text-sm text-gray-400">/{product.unit}</span>
                         </div>
                         {product.originalPrice && (
-                          <span className="text-xs text-gray-400 line-through group-hover:text-red-400 transition-colors duration-300">₹{product.originalPrice}</span>
+                          <div className="flex items-center gap-2 justify-end">
+                            <span className="text-xs text-gray-400 line-through decoration-red-400 group-hover:text-red-400 transition-colors duration-300">
+                              ₹{product.originalPrice}
+                            </span>
+                            {product.discount > 0 && (
+                              <span className="text-[10px] font-bold text-red-500 bg-red-50 px-2 py-0.5 rounded-full animate-pulse-slow">
+                                🔥 {product.discount}% OFF
+                              </span>
+                            )}
+                          </div>
+                        )}
+                        {product.discount > 0 && product.originalPrice && (
+                          <div className="text-[10px] text-emerald-600 font-medium mt-0.5">
+                            Save ₹{product.originalPrice - product.price}
+                          </div>
                         )}
                       </div>
                     </div>
@@ -1359,14 +1484,16 @@ const FreshProducts = () => {
                       }`}>
                         {product.inStock ? "✅ In Stock" : "❌ Out of Stock"}
                       </span>
+                      
+                      {/* ====== LIST VIEW BUTTONS ====== */}
                       <div className="flex gap-2 ml-auto">
                         {justAddedProductId === product.id ? (
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              navigate('/cart');
+                              handleNavigate('/cart');
                             }}
-                            className="px-4 py-2 rounded-xl transition-all duration-300 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-105 flex items-center gap-2"
+                            className="px-4 py-2 rounded-xl transition-all duration-300 bg-gradient-to-r from-emerald-500 to-emerald-700 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-105 flex items-center gap-2"
                           >
                             <ShoppingCart className="w-4 h-4" />
                             Go to Cart
@@ -1381,13 +1508,13 @@ const FreshProducts = () => {
                             }}
                             className={`px-4 py-2 rounded-xl transition-all duration-300 flex items-center gap-2 ${
                               product.inStock 
-                                ? "bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-105" 
+                                ? "bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white shadow-lg shadow-emerald-200 hover:shadow-xl hover:scale-105" 
                                 : "bg-gray-100 text-gray-400 cursor-not-allowed"
                             }`}
                             disabled={!product.inStock}
                           >
                             <ShoppingCart className="w-4 h-4" />
-                            Add
+                            <span>Add</span>
                           </button>
                         )}
                         <button
@@ -1395,7 +1522,7 @@ const FreshProducts = () => {
                             e.stopPropagation();
                             if (product.inStock) {
                               addToCart(product, 1);
-                              navigate('/cart');
+                              handleNavigate('/cart');
                             }
                           }}
                           className={`px-4 py-2 rounded-xl transition-all duration-300 flex items-center gap-2 ${
@@ -1406,7 +1533,12 @@ const FreshProducts = () => {
                           disabled={!product.inStock}
                         >
                           <Zap className="w-4 h-4" />
-                          Buy
+                          <span>Buy</span>
+                          {product.discount > 0 && product.inStock && (
+                            <span className="text-[9px] bg-white/20 px-1.5 py-0.5 rounded-full font-bold">
+                              {product.discount}%
+                            </span>
+                          )}
                         </button>
                       </div>
                     </div>

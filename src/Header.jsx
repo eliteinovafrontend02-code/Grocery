@@ -30,7 +30,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white border-b border-gray-100 w-full relative">
+    <header className="bg-white border-b border-gray-100 w-full relative sticky top-0 z-40 shadow-sm">
       {/* Top section - full width with max-width container */}
       <div className="w-full px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center gap-4 flex-wrap">
@@ -150,7 +150,7 @@ export default function Header() {
       </div>
 
       {/* Category navigation - Hidden on mobile, visible on larger screens */}
-      <nav className="hidden sm:block w-full border-t border-gray-100">
+      <nav className="hidden sm:block w-full border-t border-gray-100 bg-white">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3">
           <div className="flex items-center gap-3 sm:gap-6 flex-wrap">
             {/* Back Button - LEFT side of categories on Desktop with box style */}
