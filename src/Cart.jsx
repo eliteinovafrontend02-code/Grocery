@@ -50,8 +50,10 @@ const Cart = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
-  const summaryRef = useRef(null);
+  
+  // Refs
   const cartContainerRef = useRef(null);
+  const mainContainerRef = useRef(null);
 
   // Load cart from localStorage with better error handling
   useEffect(() => {
@@ -128,6 +130,22 @@ const Cart = () => {
       setSelectedDelivery("standard");
     }
   }, [cartItems]);
+
+  // Fix scrolling on mount and route changes
+  useEffect(() => {
+    // Reset scroll position when component mounts
+    window.scrollTo(0, 0);
+    
+    // Enable body scroll
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    
+    return () => {
+      // Cleanup - ensure scroll is enabled
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+    };
+  }, []);
 
   const getSubtotal = () => {
     return cartItems.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 0), 0);
@@ -311,10 +329,10 @@ const Cart = () => {
     );
   }
 
-  // Empty Cart Component with extra top gap
+  // Empty Cart Component
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-orange-50">
+      <div ref={mainContainerRef} className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-orange-50 overflow-y-auto">
         <div className="w-auto mx-auto px-4 pt-32 pb-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -368,9 +386,12 @@ const Cart = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-orange-50">
-      {/* Cart Header with extra top padding */}
-      <div className="w-full bg-white/80 backdrop-blur-sm border-b border-emerald-100 sticky top-0 z-50 shadow-sm">
+    <div 
+      ref={mainContainerRef} 
+      className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-orange-50 overflow-y-auto"
+    >
+      {/* Cart Header */}
+      <div className="w-full bg-white/80 backdrop-blur-sm border-b border-emerald-100 shadow-sm">
         <div className="w-auto mx-auto px-4 pt-4 pb-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -410,7 +431,7 @@ const Cart = () => {
         </div>
       </div>
 
-      {/* Cart Content with ref for scrolling */}
+      {/* Cart Content */}
       <div ref={cartContainerRef} className="w-auto mx-auto px-4 pt-6 pb-8">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Cart Items */}
@@ -521,7 +542,6 @@ const Cart = () => {
                         <div className="flex items-center gap-1">
                           <button
                             onClick={() => {
-                              // Add to wishlist functionality
                               setWishlistItems([...wishlistItems, item.id]);
                             }}
                             className="p-2 text-gray-400 hover:text-pink-500 rounded-lg hover:bg-pink-50 transition-all duration-300 hover:scale-110"
@@ -627,35 +647,11 @@ const Cart = () => {
               </span>
             </button>
 
-            {/* Recommendations section */}
-            <div className="bg-gradient-to-r from-orange-50 to-emerald-50 p-4 rounded-2xl border border-orange-100">
-              <div className="flex items-center gap-2 mb-3">
-                <Flame className="w-5 h-5 text-orange-500" />
-                <h4 className="font-semibold text-gray-700">Frequently Bought Together</h4>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {[
-                  { name: "Organic Tomatoes", price: "₹49", icon: "🍅" },
-                  { name: "Fresh Lettuce", price: "₹39", icon: "🥬" },
-                  { name: "Avocado", price: "₹89", icon: "🥑" },
-                  { name: "Blueberries", price: "₹129", icon: "🫐" },
-                ].map((item, idx) => (
-                  <button
-                    key={idx}
-                    className="bg-white p-3 rounded-xl hover:shadow-md transition-all duration-300 hover:scale-105 text-center border border-emerald-100"
-                  >
-                    <div className="text-2xl mb-1">{item.icon}</div>
-                    <p className="text-xs font-medium text-gray-700">{item.name}</p>
-                    <p className="text-xs text-emerald-600 font-bold">{item.price}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Order Summary - Sticky */}
           <div className="lg:col-span-1">
-            <div ref={summaryRef} className="sticky top-24">
+            <div className="sticky top-24">
               <div className="bg-white rounded-2xl shadow-lg p-6 border border-emerald-100 hover:shadow-xl transition-all duration-300">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-bold text-gray-800">Order Summary</h3>
@@ -680,7 +676,7 @@ const Cart = () => {
                   </span>
                 </div>
 
-                {/* Delivery Options with Real-time Timing */}
+                {/* Delivery Options */}
                 <div className="py-3 border-b border-emerald-100">
                   <div className="flex items-center justify-between mb-2">
                     <p className="text-xs text-gray-500">Delivery Options</p>
@@ -888,7 +884,6 @@ const Cart = () => {
                   ))}
                 </div>
 
-                {/* Additional Trust Indicators */}
                 <div className="mt-3 flex items-center justify-center gap-4 text-[10px] text-gray-400">
                   <span className="flex items-center gap-1">
                     <CreditCard className="w-3 h-3" />
@@ -904,7 +899,6 @@ const Cart = () => {
                   </span>
                 </div>
 
-                {/* Feedback Button */}
                 <button
                   onClick={() => setShowFeedback(true)}
                   className="mt-3 w-full text-center text-[10px] text-gray-400 hover:text-emerald-600 transition-colors flex items-center justify-center gap-1"
@@ -1036,6 +1030,14 @@ const Cart = () => {
           to { transform: rotate(360deg); }
         }
         .animate-spin { animation: spin 1s linear infinite; }
+
+        /* Fix for scrolling */
+        body {
+          overflow-y: auto !important;
+        }
+        html {
+          overflow-y: auto !important;
+        }
 
         /* Custom scrollbar */
         ::-webkit-scrollbar {
