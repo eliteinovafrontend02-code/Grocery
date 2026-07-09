@@ -30,7 +30,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white border-b border-gray-100 w-full relative sticky top-0 z-50 shadow-sm">
+   <header className="fixed top-0 left-0 w-full bg-white border-b border-gray-100 z-[9999] shadow-sm">
       {/* Top section - full width with max-width container */}
       <div className="w-full px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center gap-4 flex-wrap">
