@@ -6,6 +6,7 @@ import Header from './Header'
 import FreshProducts from './Components/pages/FreshProducts';
 import Cart from './Cart';
 import Checkout from './Checkout';
+import KitchenEssentials from './Components/pages/KitchenEssentials';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/checkout" element={<Checkout/>} />
 
         <Route path="/fresh-products" element={<FreshProducts/>} />
+        <Route path="/kitchen-essentials" element={<KitchenEssentials/>} />
 
        </Routes>
       </BrowserRouter>

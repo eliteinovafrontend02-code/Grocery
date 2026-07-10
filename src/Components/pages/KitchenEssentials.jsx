@@ -1,236 +1,120 @@
-// src/Components/pages/FreshProducts.jsx
+// src/Components/pages/KitchenEssentials.jsx
 
 import React, { useState, useEffect, useRef } from "react";
 import {
-  ShoppingCart,ChevronRight,Star,Heart,Truck,BadgePercent,Leaf,Grid,List,StarHalf,ChevronDown,Shield,Clock,Eye,X,Plus,Minus,CheckCircle,Package,MapPin,Calendar,Users,Award,ChevronLeft,ChevronRight as ChevronRightIcon,Maximize2,Minimize2,Camera,User,Play,Pause,ShoppingBag,CreditCard,Zap,Gift,Percent,AlertCircle,Trash2,
+  ShoppingCart, ChevronRight, Star, Heart, Truck, BadgePercent, Leaf, Grid, List, StarHalf, ChevronDown, Shield, Clock, Eye, X, Plus, Minus, CheckCircle, Package, MapPin, Calendar, Users, Award, ChevronLeft, ChevronRight as ChevronRightIcon, Maximize2, Minimize2, Camera, User, Play, Pause, ShoppingBag, CreditCard, Zap, Gift, Percent, AlertCircle, Trash2,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { products, categories, getProductsByCategory } from "../data/FreshProductsData";
+import { products, categories, getProductsByCategory } from "../data/KitchenEssentialsData";
 
-// Custom Fruit & Vegetable SVG Icons
-const AppleIcon = ({ className, style }) => (
+// Custom Kitchen Essentials SVG Icons
+const RiceIcon = ({ className, style }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 20a7 7 0 0 1-7-7c0-2.5 1.5-5.5 4-7 1.2-.7 2.5-1 3-1 .5 0 1.8.3 3 1 2.5 1.5 4 4.5 4 7a7 7 0 0 1-7 7z" />
-    <path d="M12 4c-.5-1.5-1.5-3-3-3" />
-    <path d="M12 4c.5-1.5 1.5-3 3-3" />
-    <path d="M8 14c.5 1 1.5 1.5 2.5 1.5" />
+    <path d="M4 12c0-4 4-6 8-6s8 2 8 6c0 2-2 4-4 5" />
+    <path d="M4 12v2c0 3 3 5 8 5s8-2 8-5v-2" />
+    <path d="M6 14c.5 1.5 2.5 3 6 3s5.5-1.5 6-3" />
+    <path d="M8 18c.5 1 2 2 4 2s3.5-1 4-2" />
   </svg>
 );
 
-const OrangeIcon = ({ className, style }) => (
+const WheatIcon = ({ className, style }) => (
+  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2v4" />
+    <path d="M12 10v4" />
+    <path d="M12 18v2" />
+    <path d="M8 6l1.5 1.5" />
+    <path d="M14.5 6l1.5-1.5" />
+    <path d="M8 14l1.5-1.5" />
+    <path d="M14.5 14l1.5 1.5" />
+    <path d="M6 10h2" />
+    <path d="M16 10h2" />
+    <path d="M7 12h10" />
+    <path d="M6 16c.5 1.5 2.5 3 6 3s5.5-1.5 6-3" />
+  </svg>
+);
+
+const FlourIcon = ({ className, style }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="8" />
-    <path d="M12 4c-.5-2-2-3.5-4-3" />
-    <path d="M12 4c.5-2 2-3.5 4-3" />
-    <path d="M8 12c.5 1.5 2 2 3.5 2" />
+    <path d="M12 4c-2 0-4 1-5.5 2.5" />
+    <path d="M12 4c2 0 4 1 5.5 2.5" />
+    <path d="M4 12c0-2 1-4 2.5-5.5" />
+    <path d="M20 12c0-2-1-4-2.5-5.5" />
+    <path d="M6 17c1 1.5 3 2.5 5.5 2.5" />
+    <path d="M18 17c-1 1.5-3 2.5-5.5 2.5" />
   </svg>
 );
 
-const LemonIcon = ({ className, style }) => (
+const OatsIcon = ({ className, style }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 2c-2.5 0-5 1.5-6 4-1 2.5 0 6 2 8.5s5.5 3 8 2c2.5-1 4-3.5 4-6s-1.5-5-3.5-7c-1.5-1-3-1.5-4.5-1.5z" />
-    <path d="M12 2v2" />
-    <path d="M18 6l-1.5 1.5" />
-    <path d="M6 6l1.5 1.5" />
-  </svg>
-);
-
-const BananaIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 20c2-2 4-6 5-9.5S10 4 12 4c2 0 3.5 2 4 4.5s.5 6 1 8.5c.5 2.5 2 3 3 3" />
-    <path d="M4 20c-1 0-2-.5-2-2s1-3 2-4" />
-    <path d="M4 20c1 0 2 1 3 1s2-1 3-2" />
-  </svg>
-);
-
-const WatermelonIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 2a8 8 0 0 0-8 8c0 4 3.5 8 8 8s8-4 8-8a8 8 0 0 0-8-8z" />
     <path d="M12 2v4" />
-    <path d="M4 10h4" />
-    <path d="M16 10h4" />
-    <path d="M10 14l1 1" />
-    <path d="M14 14l-1 1" />
-  </svg>
-);
-
-const GrapeIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="8" cy="8" r="2" />
-    <circle cx="12" cy="6" r="2" />
-    <circle cx="16" cy="8" r="2" />
-    <circle cx="7" cy="12" r="2" />
-    <circle cx="11" cy="12" r="2" />
-    <circle cx="15" cy="12" r="2" />
-    <circle cx="9" cy="16" r="2" />
-    <circle cx="13" cy="16" r="2" />
-    <circle cx="11" cy="20" r="2" />
-  </svg>
-);
-
-const StrawberryIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 22c-2.5-1-4-4-4-7 0-3.5 1.5-6 4-7s4 3.5 4 7c0 3-1.5 6-4 7z" />
-    <path d="M8 15c-1-1-1.5-2.5-1-4" />
-    <path d="M16 15c1-1 1.5-2.5 1-4" />
-    <circle cx="9" cy="10" r="1" />
-    <circle cx="12" cy="9" r="1" />
-    <circle cx="15" cy="10" r="1" />
-  </svg>
-);
-
-const BlueberryIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="8" cy="10" r="3" />
-    <circle cx="14" cy="8" r="3" />
-    <circle cx="6" cy="16" r="2" />
-    <circle cx="12" cy="14" r="2" />
-    <circle cx="18" cy="12" r="2" />
-    <circle cx="10" cy="19" r="1.5" />
-  </svg>
-);
-
-const PeachIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 22c-3-1-5-4-5-7 0-3.5 2-6 5-7s5 3.5 5 7c0 3-2 6-5 7z" />
-    <path d="M12 8c-1-2-2.5-3.5-4-4" />
-    <path d="M12 8c1-2 2.5-3.5 4-4" />
-    <path d="M10 14c.5 1 1.5 1.5 2.5 1.5" />
-  </svg>
-);
-
-const CherryIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="8" cy="12" r="3" />
-    <circle cx="16" cy="12" r="3" />
-    <path d="M8 9c-.5-2-1-3-3-4" />
-    <path d="M16 9c.5-2 1-3 3-4" />
-    <path d="M11 12v8" />
-    <path d="M13 12v8" />
-  </svg>
-);
-
-// Vegetable Icons
-const LettuceIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 4c-2 0-4 1.5-5 3.5S6 11 8 12c2 1 4 0 5-1s2-4 1.5-5.5S14 4 12 4z" />
-    <path d="M12 4c2 0 4 1.5 5 3.5S18 11 16 12c-2 1-4 0-5-1s-2-4-1.5-5.5S10 4 12 4z" />
-    <path d="M8 12c-1.5 1-3 3-2.5 5s2.5 3 4 2.5" />
-    <path d="M16 12c1.5 1 3 3 2.5 5s-2.5 3-4 2.5" />
-  </svg>
-);
-
-const CucumberIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M6 8c-1 2-.5 5 1.5 7s5 2 7 0 .5-5-1.5-7-5-2-7 0z" />
-    <path d="M8 6c.5-1.5 2-2.5 3.5-2.5" />
-    <path d="M16 6c-.5-1.5-2-2.5-3.5-2.5" />
-    <circle cx="9" cy="10" r="0.5" fill="currentColor" />
-    <circle cx="12" cy="11" r="0.5" fill="currentColor" />
-    <circle cx="15" cy="10" r="0.5" fill="currentColor" />
-  </svg>
-);
-
-const CornIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M8 4c-1 2-2 5-1.5 8s2.5 5 4.5 6c2 1 4 0 5-1.5s1-5-.5-7-3.5-4-5.5-5.5c-1.5-.5-2.5-.5-2 0z" />
-    <path d="M12 4v2" />
-    <path d="M12 10v2" />
-    <path d="M12 16v2" />
-    <path d="M8 8l1.5 1.5" />
-    <path d="M16 8l-1.5 1.5" />
+    <path d="M12 10v4" />
+    <path d="M12 18v2" />
+    <path d="M8 6l1.5 1.5" />
+    <path d="M14.5 6l1.5-1.5" />
     <path d="M8 14l1.5-1.5" />
-    <path d="M16 14l-1.5-1.5" />
+    <path d="M14.5 14l1.5 1.5" />
+    <path d="M6 10h2" />
+    <path d="M16 10h2" />
+    <path d="M7 12h10" />
+    <circle cx="12" cy="12" r="3" />
   </svg>
 );
 
-const CarrotIcon = ({ className, style }) => (
+const DalIcon = ({ className, style }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 4c-.5-1.5-2-2.5-3.5-2" />
-    <path d="M12 4c.5-1.5 2-2.5 3.5-2" />
-    <path d="M8.5 6c-.5 1.5 0 3.5 1.5 4.5s3.5.5 4.5-1.5-1-3.5-2.5-4.5c-1-.5-2-.5-3.5 1.5z" />
-    <path d="M6 12c-1 1.5-1 4 1 6s4.5 2 6 .5" />
-    <path d="M18 12c1 1.5 1 4-1 6s-4.5 2-6 .5" />
-    <path d="M10 14l1 1" />
-    <path d="M14 14l-1 1" />
+    <circle cx="8" cy="10" r="2" />
+    <circle cx="16" cy="10" r="2" />
+    <circle cx="8" cy="16" r="2" />
+    <circle cx="16" cy="16" r="2" />
+    <circle cx="12" cy="13" r="2" />
+    <path d="M4 8c0-2 2-4 4-4h8c2 0 4 2 4 4v8c0 2-2 4-4 4H8c-2 0-4-2-4-4V8z" />
   </svg>
 );
 
-const OnionIcon = ({ className, style }) => (
+const OilIcon = ({ className, style }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="6" />
-    <path d="M12 6c-1-2-2.5-3-4-2.5" />
-    <path d="M12 6c1-2 2.5-3 4-2.5" />
-    <path d="M6 12c-2 1-3 2.5-2.5 4" />
-    <path d="M18 12c2 1 3 2.5 2.5 4" />
-    <path d="M8 8l-1.5-1.5" />
-    <path d="M16 8l1.5-1.5" />
+    <path d="M12 2c-2 2-4 4-4 6s2 4 4 4 4-2 4-4-2-4-4-4z" />
+    <path d="M12 2v2" />
+    <path d="M12 8v2" />
+    <path d="M12 14v2" />
+    <path d="M8 6l-1.5 1.5" />
+    <path d="M16 6l1.5 1.5" />
+    <path d="M8 12l-1.5 1.5" />
+    <path d="M16 12l1.5 1.5" />
   </svg>
 );
 
-const GarlicIcon = ({ className, style }) => (
+const PulsesIcon = ({ className, style }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 4c-2 0-4 1.5-4.5 3.5S7 11 9 12.5s4 1 5.5-.5 1-4-.5-5.5S14 4 12 4z" />
-    <path d="M12 4c2 0 4 1.5 4.5 3.5S17 11 15 12.5s-4 1-5.5-.5-1-4 .5-5.5S10 4 12 4z" />
-    <path d="M9 12c-1.5 1-2.5 3-1.5 4.5s3 2 4.5.5" />
-    <path d="M15 12c1.5 1 2.5 3 1.5 4.5s-3 2-4.5.5" />
+    <circle cx="8" cy="8" r="3" />
+    <circle cx="16" cy="8" r="3" />
+    <circle cx="8" cy="16" r="3" />
+    <circle cx="16" cy="16" r="3" />
+    <circle cx="12" cy="12" r="1" />
   </svg>
 );
 
-const BroccoliIcon = ({ className, style }) => (
+const SugarIcon = ({ className, style }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 8c-2 0-4 1-5 2.5S6 14 7 16s3 2 5 1 3-3 2.5-5-2-4-3.5-4.5c-1-.5-1.5-.5-2 0z" />
-    <path d="M12 8c2 0 4 1 5 2.5S18 14 17 16s-3 2-5 1-3-3-2.5-5 2-4 3.5-4.5c1-.5 1.5-.5 2 0z" />
-    <path d="M7 16c-1.5 1-3 2.5-2.5 4.5s2.5 3 4.5 1.5" />
-    <path d="M17 16c1.5 1 3 2.5 2.5 4.5s-2.5 3-4.5 1.5" />
-    <path d="M10 11l1-1" />
-    <path d="M14 11l-1-1" />
+    <path d="M12 4c-2 0-4 1-5 2.5S6 9.5 7 11s2 2 3.5 1.5 2.5-2 3-3.5.5-3-1-4.5S14 4 12 4z" />
+    <path d="M12 4c2 0 4 1 5 2.5S18 9.5 17 11s-2 2-3.5 1.5-2.5-2-3-3.5-.5-3 1-4.5S10 4 12 4z" />
+    <path d="M7 11c-1.5 1-2.5 3-1.5 4.5s3 2 4.5.5" />
+    <path d="M17 11c1.5 1 2.5 3 1.5 4.5s-3 2-4.5.5" />
   </svg>
 );
 
-const TomatoIcon = ({ className, style }) => (
+const SaltIcon = ({ className, style }) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="13" r="7" />
-    <path d="M12 6c-1-2-2.5-3.5-4-4" />
-    <path d="M12 6c1-2 2.5-3.5 4-4" />
-    <path d="M8 13c.5 1.5 2 2.5 3.5 2.5" />
-    <path d="M16 13c-.5 1.5-2 2.5-3.5 2.5" />
-    <path d="M10 9c.5-.5 1.5-1 2-1s1.5.5 2 1" />
+    <rect x="4" y="6" width="16" height="14" rx="2" />
+    <path d="M8 6V4h8v2" />
+    <path d="M6 10h12" />
+    <path d="M6 14h12" />
+    <path d="M6 18h8" />
   </svg>
 );
 
-const PepperIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M8 6c-1.5 1-2.5 3-2 5s2.5 3.5 4.5 3.5 3.5-1 4-3 .5-4-1-5-3-1.5-5.5-.5z" />
-    <path d="M12 4v2" />
-    <path d="M6 8l1.5 1.5" />
-    <path d="M18 8l-1.5 1.5" />
-    <path d="M6 14l1.5-1.5" />
-    <path d="M18 14l-1.5-1.5" />
-    <path d="M8 18c1.5 1 3.5 1.5 5 1s2.5-1.5 2-3" />
-  </svg>
-);
-
-const AvocadoIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 22c-3-1-5.5-4.5-5.5-8 0-3 2-6 5.5-6s5.5 3 5.5 6c0 3.5-2.5 7-5.5 8z" />
-    <circle cx="12" cy="14" r="3" />
-    <path d="M12 8c-1-2-2.5-3.5-4-3.5" />
-    <path d="M12 8c1-2 2.5-3.5 4-3.5" />
-  </svg>
-);
-
-const MangoIcon = ({ className, style }) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 22c-3-1-5-4-5-7 0-3.5 2-6 5-7s5 3.5 5 7c0 3-2 6-5 7z" />
-    <path d="M12 8c-.5-1.5-2-3-3.5-3" />
-    <path d="M12 8c.5-1.5 2-3 3.5-3" />
-    <path d="M7 12c-1 1-1.5 2.5-1 4" />
-    <path d="M17 12c1 1 1.5 2.5 1 4" />
-  </svg>
-);
-
-const FreshProducts = () => {
+const KitchenEssentials = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [viewMode, setViewMode] = useState("grid");
@@ -265,37 +149,37 @@ const FreshProducts = () => {
   // Banner Data
   const BANNERS = [
     {
-      id: "fresh-fruits",
-      title1: "Fresh Fruits",
-      title2: "& Vegetables",
-      copy: "From farm-fresh produce to daily essentials, everything you need, delivered fresh!",
-      image: "/fresh-products/fbanner1.png",
+      id: "rice-wheat",
+      title1: "Premium",
+      title2: "Rice & Wheat",
+      copy: "Finest quality rice, wheat, and flour for your daily needs. Freshly milled and packed.",
+      image: "/kitchen-essentials/kbanner1.png",
       tags: [
-        { icon: Leaf, label: "Farm Fresh", sub: "100% Natural" },
+        { icon: Leaf, label: "Premium Quality", sub: "100% Pure" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
-        { icon: BadgePercent, label: "Best Quality", sub: "Quality You Can Trust" },
+        { icon: BadgePercent, label: "Best Prices", sub: "Quality You Can Trust" },
       ],
     },
     {
-      id: "organic-veg",
-      title1: "Organic",
-      title2: "Vegetables",
-      copy: "Certified organic vegetables grown without pesticides. Healthy living starts here.",
-      image: "/fresh-products/fbanner2.png",
+      id: "dals-pulses",
+      title1: "Premium",
+      title2: "Dals & Pulses",
+      copy: "High-protein dals and pulses sourced from quality farms. Healthy eating made easy.",
+      image: "/kitchen-essentials/kbanner2.png",
       tags: [
-        { icon: Leaf, label: "Organic", sub: "Chemical Free" },
+        { icon: Leaf, label: "Premium Quality", sub: "100% Pure" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
         { icon: BadgePercent, label: "Great Prices", sub: "Up to 25% Off" },
       ],
     },
     {
-      id: "exotic-fruits",
-      title1: "Exotic",
-      title2: "Fruits",
-      copy: "Premium exotic fruits imported from around the world. Dragon fruit, Avocado & more.",
-      image:"/fresh-products/fbanner3.png",
+      id: "oils-ghee",
+      title1: "Pure",
+      title2: "Oils & Ghee",
+      copy: "Cold-pressed oils and pure ghee to elevate your cooking experience.",
+      image: "/kitchen-essentials/kbanner3.png",
       tags: [
-        { icon: Leaf, label: "Exotic", sub: "Imported Quality" },
+        { icon: Leaf, label: "Pure & Natural", sub: "No Preservatives" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
         { icon: BadgePercent, label: "Special Price", sub: "Limited Time Offer" },
       ],
@@ -475,7 +359,6 @@ const FreshProducts = () => {
     setQuantity(prev => {
       const newQty = prev + change;
       if (newQty < 1) return 1;
-     
       return newQty;
     });
   };
@@ -588,7 +471,7 @@ const FreshProducts = () => {
     );
   };
 
-// Product Modal Component - Updated with Buy Now functionality
+// Product Modal Component
 const ProductModal = () => {
   if (!selectedProduct) return null;
 
@@ -647,15 +530,10 @@ const ProductModal = () => {
                 }`}
               />
               
-              <div className="absolute top-2 left-2 sm:top-4 sm:left-4 flex flex-col gap-1.5 sm:gap-2 z-10">
+              <div className="absolute top-2 left-2 sm:top-4 sm:left-4 flex flex-col gap-1.5 sm:gap-2 z-10 mt-5">
                 {selectedProduct.discount > 0 && (
                   <span className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-[10px] sm:text-xs font-bold px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-lg animate-pulse-slow">
                     {selectedProduct.discount}% OFF
-                  </span>
-                )}
-                {selectedProduct.isOrganic && (
-                  <span className="bg-gradient-to-r from-emerald-600 to-green-600 text-white text-[10px] sm:text-xs font-bold px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-lg">
-                    🌿 Organic
                   </span>
                 )}
               </div>
@@ -665,9 +543,9 @@ const ProductModal = () => {
                   e.stopPropagation();
                   toggleWishlist(selectedProduct.id);
                 }}
-                className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 p-1.5 sm:p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:scale-110 transition-all duration-300 hover:shadow-xl"
+                className="absolute top-1 right-2 sm:top-4 sm:right-4 z-10 p-1.5 sm:p-2 mt-5 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:scale-110 transition-all duration-300 hover:shadow-xl"
               >
-                <Heart className={`w-4 h-4 sm:w-5 sm:h-5 transition-colors ${
+                <Heart className={`w-4 h-4 sm:w-5 sm:h-5  transition-colors ${
                   wishlist.includes(selectedProduct.id) ? "fill-red-500 text-red-500 animate-pulse-slow" : "text-gray-600 hover:text-red-500"
                 }`} />
               </button>
@@ -929,7 +807,7 @@ const ProductModal = () => {
                   </div>
                   <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-500">
                     <Leaf className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600" />
-                    <span>Farm fresh</span>
+                    <span>Premium quality</span>
                   </div>
                 </div>
 
@@ -990,34 +868,15 @@ const ProductModal = () => {
           <div className=" hidden md:block absolute bottom-8 left-10 w-20 h-14 opacity-50 pointer-events-none z-0 animate-float-slow" style={{ animationDelay: "1s", backgroundImage: "radial-gradient(circle, #22c55e 1.5px, transparent 1.5px)", backgroundSize: "10px 10px" }} />
           <div className="hidden md:block absolute top-8 right-28 w-20 h-14 opacity-40 pointer-events-none z-0 animate-float-slow hidden md:block" style={{ animationDelay: "2s", backgroundImage: "radial-gradient(circle, #22c55e 1.5px, transparent 1.5px)", backgroundSize: "10px 10px" }} />
 
-          <AppleIcon className="absolute top-8 left-[36%] w-5 h-5 text-orange-600/40 pointer-events-none z-0 hidden sm:block animate-float-leaf-1" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-          <LettuceIcon className="absolute top-1/2 left-[40%] w-6 h-6 text-orange-600/30 pointer-events-none z-0 hidden md:block animate-float-leaf-2" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-          <OrangeIcon className="absolute bottom-10 left-[46%] w-5 h-5 text-orange-600/30 pointer-events-none z-0 hidden md:block animate-float-leaf-3" style={{ transform: 'scale(1.3)', transformOrigin: 'center' }} />
-          <CarrotIcon className="absolute top-6 right-[38%] w-6 h-6 text-orange-600/30 pointer-events-none z-0 hidden md:block animate-float-leaf-4" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-          <LemonIcon className="absolute bottom-12 right-[20%] w-5 h-5 text-green-400/30 pointer-events-none z-0 hidden lg:block animate-float-leaf-5" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-          <CornIcon className="absolute top-1/3 left-[15%] w-7 h-7 text-orange-500/20 pointer-events-none z-0 hidden lg:block animate-float-leaf-6" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-          <BananaIcon className="hidden md:block absolute top-5 right-[35%] w-6 h-6 text-green-400/25 pointer-events-none z-0 animate-float-leaf-7" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-          <CucumberIcon className="absolute bottom-20 left-[30%] w-7 h-7 text-green-400/20 pointer-events-none z-0 animate-float-leaf-8" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-          <WatermelonIcon className="absolute top-2/3 left-[45%] w-5 h-5 text-green-300/30 pointer-events-none z-0 animate-float-leaf-9" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-          <GrapeIcon className="hidden md:block absolute top-1/4 right-[40%] w-7 h-7 text-orange-500/15 pointer-events-none z-0 animate-float-leaf-10" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-          <StrawberryIcon className="absolute bottom-1/3 right-[30%] w-6 h-6 text-green-400/20 pointer-events-none z-0 animate-float-leaf-11" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-          <BlueberryIcon className="hidden md:block absolute top-10 left-[45%] w-5 h-5 text-orange-400/35 pointer-events-none z-0 animate-float-leaf-12" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-          <PeachIcon className="absolute bottom-16 left-[8%] w-7 h-7 text-green-500/20 pointer-events-none z-0 animate-float-leaf-13" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-          <CherryIcon className="absolute top-1/2 right-[45%] w-6 h-6 text-green-500/25 pointer-events-none z-0 animate-float-leaf-14" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-
-          <AppleIcon className="absolute top-0 left-[12%] w-6 h-6 text-orange-500/30 pointer-events-none z-0 animate-falling-leaf-1" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-          <LettuceIcon className="absolute top-0 right-[18%] w-5 h-5 text-green-400/25 pointer-events-none z-0 animate-falling-leaf-2" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-          <OrangeIcon className="absolute top-0 left-[45%] w-7 h-7 text-green-400/20 pointer-events-none z-0 animate-falling-leaf-3" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-          <CarrotIcon className="absolute top-0 right-[8%] w-5 h-5 text-orange-600/25 pointer-events-none z-0 animate-falling-leaf-4" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-          <LemonIcon className="absolute top-0 left-[70%] w-6 h-6 text-green-400/20 pointer-events-none z-0 animate-falling-leaf-5" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-
-          <CornIcon className="absolute top-1/3 left-[60%] w-7 h-7 text-orange-400/20 pointer-events-none z-0 animate-spin-leaf-1" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-          <BananaIcon className="absolute bottom-1/4 right-[60%] w-6 h-6 text-green-300/25 pointer-events-none z-0 animate-spin-leaf-2" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-          <CucumberIcon className="absolute top-1/2 left-[75%] w-5 h-5 text-green-400/30 pointer-events-none z-0 animate-spin-leaf-3" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-
-          <WatermelonIcon className="absolute bottom-8 right-[40%] w-6 h-6 text-orange-400/30 pointer-events-none z-0 animate-bounce-leaf-1" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
-          <GrapeIcon className="absolute top-12 left-[55%] w-5 h-5 text-green-300/25 pointer-events-none z-0 animate-bounce-leaf-2" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
-          <StrawberryIcon className="absolute bottom-20 left-[60%] w-7 h-7 text-green-400/20 pointer-events-none z-0 animate-bounce-leaf-3" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
+          <RiceIcon className="absolute top-8 left-[36%] w-5 h-5 text-orange-600/40 pointer-events-none z-0 hidden sm:block animate-float-leaf-1" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
+          <WheatIcon className="absolute top-1/2 left-[40%] w-6 h-6 text-orange-600/30 pointer-events-none z-0 hidden md:block animate-float-leaf-2" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
+          <FlourIcon className="absolute bottom-10 left-[46%] w-5 h-5 text-orange-600/30 pointer-events-none z-0 hidden md:block animate-float-leaf-3" style={{ transform: 'scale(1.3)', transformOrigin: 'center' }} />
+          <OatsIcon className="absolute top-6 right-[38%] w-6 h-6 text-orange-600/30 pointer-events-none z-0 hidden md:block animate-float-leaf-4" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
+          <DalIcon className="absolute bottom-12 right-[20%] w-5 h-5 text-green-400/30 pointer-events-none z-0 hidden lg:block animate-float-leaf-5" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
+          <OilIcon className="absolute top-1/3 left-[15%] w-7 h-7 text-orange-500/20 pointer-events-none z-0 hidden lg:block animate-float-leaf-6" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
+          <PulsesIcon className="hidden md:block absolute top-5 right-[35%] w-6 h-6 text-green-400/25 pointer-events-none z-0 animate-float-leaf-7" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
+          <SugarIcon className="absolute bottom-20 left-[30%] w-7 h-7 text-green-400/20 pointer-events-none z-0 animate-float-leaf-8" style={{ transform: 'scale(1.1)', transformOrigin: 'center' }} />
+          <SaltIcon className="absolute top-2/3 left-[45%] w-5 h-5 text-green-300/30 pointer-events-none z-0 animate-float-leaf-9" style={{ transform: 'scale(1.2)', transformOrigin: 'center' }} />
 
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer pointer-events-none z-0"></div>
 
@@ -1080,9 +939,9 @@ const ProductModal = () => {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-1">
           {[
             { icon: Truck, title: "Free Delivery", sub: "Above ₹499", bg: "bg-orange-50", text: "text-orange-600", border: "border-orange-100" },
-            { icon: Shield, title: "100% Fresh", sub: "Quality Guaranteed", bg: "bg-green-50", text: "text-green-600", border: "border-green-100" },
+            { icon: Shield, title: "100% Pure", sub: "Quality Guaranteed", bg: "bg-green-50", text: "text-green-600", border: "border-green-100" },
             { icon: Clock, title: "Same Day", sub: "Delivery Available", bg: "bg-orange-50", text: "text-orange-600", border: "border-orange-100" },
-            { icon: Leaf, title: "Organic", sub: "Certified Organic", bg: "bg-green-50", text: "text-green-600", border: "border-green-100" },
+            { icon: Leaf, title: "Premium", sub: "Certified Quality", bg: "bg-green-50", text: "text-green-600", border: "border-green-100" },
           ].map((f, index) => (
             <div 
               key={f.title} 
@@ -1108,7 +967,7 @@ const ProductModal = () => {
         <div className="flex items-center gap-2 text-sm py-4 animate-slide-up">
           <span className="text-orange-400 hover:text-emerald-500 cursor-pointer transition-all duration-300 hover:translate-x-1 hover:scale-105">Home</span>
           <span className="text-gray-600 animate-pulse-slow">/</span>
-          <span className="text-emerald-500 font-medium bg-emerald-50 px-3 py-1 rounded-full hover:scale-105 transition-transform duration-300">Fresh Products</span>
+          <span className="text-emerald-500 font-medium bg-emerald-50 px-3 py-1 rounded-full hover:scale-105 transition-transform duration-300">Kitchen Essentials</span>
           <span className="ml-auto text-xs text-gray-400 bg-gray-50 px-3 py-1 rounded-full animate-pulse-slow hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-300">
             {products.length} Products Available
           </span>
@@ -1255,12 +1114,6 @@ const ProductModal = () => {
                       {product.discount > 0 && (
                         <span className="absolute top-3 left-3 bg-gradient-to-r from-orange-400 to-red-400 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-lg shadow-orange-200 animate-pulse-slow hover:animate-bounce-slow">
                           {product.discount}% OFF
-                        </span>
-                      )}
-                      
-                      {product.isOrganic && (
-                        <span className="absolute top-3 left-3 bg-gradient-to-r from-emerald-600 to-green-600 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-lg shadow-emerald-200 animate-bounce-slow hover:animate-pulse-slow">
-                          🌿 Organic
                         </span>
                       )}
 
@@ -1455,11 +1308,6 @@ const ProductModal = () => {
                     </div>
                     
                     <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-3">
-                      {product.isOrganic && (
-                        <span className="text-xs bg-emerald-50 text-emerald-700 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-emerald-200">
-                          🌿 Organic
-                        </span>
-                      )}
                       {product.discount > 0 && (
                         <span className="text-xs bg-orange-50 text-orange-700 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-orange-200">
                           🔥 {product.discount}% OFF
@@ -1833,4 +1681,4 @@ const ProductModal = () => {
   );
 };
 
-export default FreshProducts;
+export default KitchenEssentials;

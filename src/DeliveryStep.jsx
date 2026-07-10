@@ -71,19 +71,19 @@ const DeliveryStep = ({
     quick: {
       title: "Quick Delivery",
       description: "Fastest delivery option",
-      speed: "30-45 min",
+      speed: "15-25 mins",
       badge: "⚡ Fastest"
     },
     express: {
       title: "Express Delivery",
       description: "Same day delivery",
-      speed: "2-4 hours",
+      speed: "30-45 mins",
       badge: "🚀 Express"
     },
     standard: {
       title: "Standard Delivery",
       description: "Regular delivery service",
-      speed: "24-48 hours",
+      speed: "1-2 hrs",
       badge: "📦 Standard"
     }
   };
