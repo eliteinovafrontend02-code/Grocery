@@ -92,7 +92,7 @@ export default function Home() {
       bg: "bg-amber-50", 
       ring: "ring-amber-200", 
       image: "/cspices_dryfruits.png",
-      link: "/spices-dryfruits"
+      link: "/spices-dry-fruits"
     },
     { 
       name: "Dairy Products & Snacks", 
