@@ -7,6 +7,8 @@ import FreshProducts from './Components/pages/FreshProducts';
 import Cart from './Cart';
 import Checkout from './Checkout';
 import KitchenEssentials from './Components/pages/KitchenEssentials';
+import SpicesAndDryFruits from './Components/pages/SpicesAndDryFruits';
+import DairyProductsAndSnacks from './Components/pages/DairyProductsAndSnacks';
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
 
         <Route path="/fresh-products" element={<FreshProducts/>} />
         <Route path="/kitchen-essentials" element={<KitchenEssentials/>} />
+        <Route path="/spices-dry-fruits" element={<SpicesAndDryFruits/>} />
+        <Route path="/dairy-snacks" element={<DairyProductsAndSnacks/>} />
 
        </Routes>
       </BrowserRouter>
