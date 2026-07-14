@@ -486,7 +486,7 @@ const ProductModal = () => {
       onClick={closeProductModal}
     >
       <div 
-        className={`relative  bg-white rounded-2xl sm:rounded-3xl  max-w-[85vw] md: max-w-4xl lg:max-w-5xl  max-h-[78vh] sm:max-h-[80vh] overflow-y-auto   ${
+        className={`relative  bg-white rounded-2xl sm:rounded-3xl mt-10 max-w-[85vw] md: max-w-4xl lg:max-w-5xl  max-h-[78vh] sm:max-h-[80vh] overflow-y-auto   ${
           isModalOpen ? 'scale-100 opacity-100' : 'scale-90 opacity-0'
         } ${isFullScreen ? '!max-w-full !max-h-full !rounded-none' : ''}`}
         onClick={(e) => e.stopPropagation()}
@@ -855,7 +855,7 @@ const ProductModal = () => {
       </button>
 
       {/* Banner Section */}
-     <section className="w-full px-3 sm:px-6 lg:px-8 pt-2 mt-29 sm:mt-32 md:mt-34 lg:mt-34 ">
+     <section className="w-full px-3 sm:px-6 lg:px-8 pt-2 mt-36 sm:mt-32 md:mt-34 lg:mt-34 ">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-60 via-[#fdf6f0] to-green-80/50 transition-colors duration-700 w-full h-[160px] sm:h-[300px] md:h-[340px] lg:h-[380px]">
           <div className="hidden md:block absolute inset-0 bg-gradient-to-br from-orange-100/20 via-transparent to-green-100/20 animate-gradient-shift"></div>
           <div className="hidden md:block absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-green-800/30 via-green-600/10 to-transparent pointer-events-none z-0"></div>

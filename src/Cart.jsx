@@ -409,7 +409,7 @@ const Cart = () => {
             </p>
             
             <button
-              onClick={() => navigate('/fresh-products')}
+              onClick={() => navigate('/')}
               className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl shadow-2xl shadow-emerald-200 hover:shadow-3xl hover:scale-105 transition-all duration-500 group"
             >
               <ArrowLeft className="w-5 h-5 group-hover:-translate-x-2 transition-transform duration-300" />
@@ -725,7 +725,7 @@ const Cart = () => {
             })}
 
             <button
-              onClick={() => navigate('/fresh-products')}
+              onClick={() => navigate('/')}
               className="w-full py-5 text-emerald-600 font-semibold hover:bg-emerald-50/80 backdrop-blur-sm rounded-3xl transition-all duration-500 flex items-center justify-center gap-3 group border-2 border-dashed border-emerald-200/50 hover:border-emerald-400/80 hover:shadow-lg"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-2 transition-transform duration-500" />

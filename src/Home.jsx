@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
 import {
   ShoppingCart,Carrot,UtensilsCrossed,Nut,Milk,ChevronRight,ChevronLeft,Star,Heart,Truck,RotateCcw,Lock,BadgePercent,Headphones,Leaf,
 } from "lucide-react";
@@ -15,6 +15,7 @@ export default function Home() {
       title2: "Good Life",
       copy: "From farm-fresh produce to daily essentials, everything you need, delivered fresh!",
       cta: "Shop Now",
+      path:"/fresh-products",
       image: "/hbanner1.png",
       badgeLine1: "100%",
       badgeLine2: "Fresh & Natural",
@@ -31,6 +32,7 @@ export default function Home() {
       title2: "Confidence",
       copy: "Oils, grains, staples and everyday must-haves — all in one place, always in stock.",
       cta: "Shop Now",
+      path:"/kitchen-essentials",
       image: "/hbanner2.png",
       badgeLine1: "100%",
       badgeLine2: "Everyday Staples",
@@ -46,6 +48,7 @@ export default function Home() {
       title2: "Rich Aroma",
       copy: "Hand-picked spices and premium dry fruits sourced straight from trusted farms.",
       cta: "Shop Now",
+       path:"/spices-dry-fruits",
       image: "/hbanner3.png",
       badgeLine1: "100%",
       badgeLine2: "Pure & Natural",
@@ -61,6 +64,7 @@ export default function Home() {
       title2: "Happy Snacking",
       copy: "Farm-fresh milk, paneer and everyone's favourite snacks — delivered chilled and crisp.",
       cta: "Shop Now",
+       path:"/dairy-snacks",
       image: "/hbanner4.png",
       badgeLine1: "100%",
       badgeLine2: "Farm to Fridge",
@@ -102,55 +106,6 @@ export default function Home() {
       link: "/dairy-snacks"
     },
   ];
-
-  // const PROMO_CARDS = [
-  //   {
-  //     title1: "Fresh Products",
-  //     title2: "For Healthy Life",
-  //     off: "30",
-  //     cta: "Shop Now",
-  //     from: "from-green-50",
-  //     to: "to-green-100",
-  //     titleColor: "text-green-700",
-  //     btn: "bg-green-700 hover:bg-green-800",
-  //     image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?q=80&w=600&auto=format&fit=crop",
-  //   },
-  //   {
-  //     title1: "Kitchen",
-  //     title2: "Essentials",
-  //     off: "20",
-  //     cta: "Shop Now",
-  //     from: "from-orange-50",
-  //     to: "to-orange-100",
-  //     titleColor: "text-orange-700",
-  //     btn: "bg-orange-600 hover:bg-orange-700",
-  //     image: "https://images.unsplash.com/photo-1584473457406-6240486418e9?q=80&w=600&auto=format&fit=crop",
-  //   },
-  //   {
-  //     title1: "Spices &",
-  //     title2: "Dry Fruits",
-  //     off: "25",
-  //     cta: "Shop Now",
-  //     from: "from-amber-50",
-  //     to: "to-amber-100",
-  //     titleColor: "text-amber-700",
-  //     btn: "bg-amber-600 hover:bg-amber-700",
-  //     image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?q=80&w=600&auto=format&fit=crop",
-  //   },
-  //   {
-  //     title1: "Dairy Products",
-  //     title2: "& Snacks",
-  //     off: "15",
-  //     cta: "Shop Now",
-  //     from: "from-blue-50",
-  //     to: "to-blue-100",
-  //     titleColor: "text-blue-700",
-  //     btn: "bg-blue-600 hover:bg-blue-700",
-  //     image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?q=80&w=600&auto=format&fit=crop",
-  //   },
-  // ];
-
-  
 
   const FEATURES = [
     { icon: Truck, title: "Fast & Free Delivery", sub: "On orders above ₹499" },
@@ -195,11 +150,11 @@ export default function Home() {
     <div className="min-h-screen w-full bg-[#fdfcf9]">
      
 {/* Hero Banner - Only Image Size Increased */}
-<section className="w-full px-4 sm:px-6 lg:px-8 pt-2 ">
-  <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-60 via-[#d0e6d8] to-green-80/50 transition-colors duration-700 w-full h-[420px] sm:h-[460px] md:h-[500px] lg:h-[540px]">
+<section className="w-full px-3 sm:px-6 lg:px-8 pt-2 mt-[9rem] sm:mt-32 md:mt-[8.5rem] lg:mt-[8.5rem] ">
+  <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-60 via-[#d0e6d8] to-green-80/50 transition-colors duration-700 w-full h-[200px] sm:h-[360px] md:h-[400px] lg:h-[480px]">
 
     {/* Animated Gradient Background */}
-    <div className="absolute inset-0 bg-gradient-to-br from-orange-100/20 via-transparent to-green-100/20 animate-gradient-shift"></div>
+    <div className=" absolute inset-0 bg-gradient-to-br from-orange-100/20 via-transparent to-green-100/20 animate-gradient-shift"></div>
 
     {/* Bottom Shade - Theme Color Gradient */}
     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-green-800/30 via-green-600/10 to-transparent pointer-events-none z-0"></div>
@@ -212,9 +167,11 @@ export default function Home() {
     <div className="absolute bottom-0 left-0 w-16 h-16 md:w-20 md:h-20 bg-green-200/40 rounded-tr-[2.5rem] pointer-events-none z-0 animate-blob-pulse" style={{ animationDelay: "1.5s" }} />
 
     {/* Decorative floating dots with float animation */}
-    <div className="absolute top-6 left-6 w-24 h-16 opacity-60 pointer-events-none z-0 animate-float-slow" style={{ backgroundImage: "radial-gradient(circle, #f4a13c 1.5px, transparent 1.5px)", backgroundSize: "10px 10px" }} />
-    <div className="absolute bottom-8 left-10 w-20 h-14 opacity-50 pointer-events-none z-0 animate-float-slow" style={{ animationDelay: "1s", backgroundImage: "radial-gradient(circle, #f4a13c 1.5px, transparent 1.5px)", backgroundSize: "10px 10px" }} />
-    <div className="absolute top-8 right-28 w-20 h-14 opacity-40 pointer-events-none z-0 animate-float-slow hidden md:block" style={{ animationDelay: "2s", backgroundImage: "radial-gradient(circle, #f4a13c 1.5px, transparent 1.5px)", backgroundSize: "10px 10px" }} />
+    <div className="hidden md:block absolute top-6 left-6 w-24 h-16 opacity-60 pointer-events-none z-0 animate-float-slow" style={{ backgroundImage: "radial-gradient(circle, #f4a13c 1.5px, transparent 1.5px)", backgroundSize: "10px 10px" }} />
+
+    <div className="hidden md:block absolute bottom-8 left-10 w-20 h-14 opacity-50 pointer-events-none z-0 animate-float-slow" style={{ animationDelay: "1s", backgroundImage: "radial-gradient(circle, #f4a13c 1.5px, transparent 1.5px)", backgroundSize: "10px 10px" }} />
+    
+    <div className="hidden md:block absolute top-8 right-28 w-20 h-14 opacity-40 pointer-events-none z-0 animate-float-slow hidden md:block" style={{ animationDelay: "2s", backgroundImage: "radial-gradient(circle, #f4a13c 1.5px, transparent 1.5px)", backgroundSize: "10px 10px" }} />
 
     {/* Floating Leaves with elegant animations - 50% INCREASED SIZES */}
     <Leaf className="absolute top-8 left-[36%] w-6 h-6 text-green-600/40 pointer-events-none z-0 hidden sm:block animate-float-leaf" style={{ "--rot": "-15deg", animationDelay: "0s" }} />
@@ -225,14 +182,14 @@ export default function Home() {
     <Leaf className="absolute top-1/3 left-[15%] w-7 h-7 text-green-500/20 pointer-events-none z-0 hidden lg:block animate-float-leaf" style={{ "--rot": "-30deg", animationDelay: "2.5s" }} />
 
     {/* Additional leaves with different colors and sizes - 50% INCREASED */}
-    <Leaf className="absolute top-5 right-[35%] w-6 h-6 text-amber-400/25 pointer-events-none z-0 animate-float-leaf-16" />
-    <Leaf className="absolute bottom-20 left-[30%] w-7 h-7 text-emerald-400/20 pointer-events-none z-0 animate-float-leaf-17" />
-    <Leaf className="absolute top-2/3 left-[45%] w-5 h-5 text-orange-300/30 pointer-events-none z-0 animate-float-leaf-18" />
-    <Leaf className="absolute top-1/4 right-[40%] w-8 h-8 text-green-500/15 pointer-events-none z-0 animate-float-leaf-19" />
-    <Leaf className="absolute bottom-1/3 right-[30%] w-6 h-6 text-yellow-400/20 pointer-events-none z-0 animate-float-leaf-20" />
-    <Leaf className="absolute top-10 left-[45%] w-5 h-5 text-green-400/35 pointer-events-none z-0 animate-float-leaf-21" />
-    <Leaf className="absolute bottom-16 left-[8%] w-7 h-7 text-amber-500/20 pointer-events-none z-0 animate-float-leaf-22" />
-    <Leaf className="absolute top-1/2 right-[45%] w-6 h-6 text-emerald-500/25 pointer-events-none z-0 animate-float-leaf-23" />
+    <Leaf className="absolute top-5 right-[35%] w-3 h-3 text-amber-400/25 pointer-events-none z-0 animate-float-leaf-16" />
+    <Leaf className="hidden md:block absolute bottom-20 left-[30%] w-7 h-7 text-emerald-400/20 pointer-events-none z-0 animate-float-leaf-17" />
+    <Leaf className="hidden md:block absolute top-2/3 left-[45%] w-5 h-5 text-orange-300/30 pointer-events-none z-0 animate-float-leaf-18" />
+    <Leaf className="hidden md:block absolute top-1/4 right-[40%] w-8 h-8 text-green-500/15 pointer-events-none z-0 animate-float-leaf-19" />
+    <Leaf className="hidden md:block absolute bottom-1/3 right-[30%] w-6 h-6 text-yellow-400/20 pointer-events-none z-0 animate-float-leaf-20" />
+    <Leaf className="hidden md:block absolute top-10 left-[45%] w-5 h-5 text-green-400/35 pointer-events-none z-0 animate-float-leaf-21" />
+    <Leaf className="hidden md:block absolute bottom-16 left-[8%] w-7 h-7 text-amber-500/20 pointer-events-none z-0 animate-float-leaf-22" />
+    <Leaf className="hidden md:block absolute top-1/2 right-[45%] w-6 h-6 text-emerald-500/25 pointer-events-none z-0 animate-float-leaf-23" />
 
     {/* Falling leaves - 50% INCREASED */}
     <Leaf className="absolute top-0 left-[12%] w-6 h-6 text-green-500/30 pointer-events-none z-0 animate-falling-leaf-1" />
@@ -259,10 +216,10 @@ export default function Home() {
       <p className="banner-script text-3xl sm:text-4xl md:text-5xl text-orange-500 leading-none mb-1 animate-slide-up">
         {banner.title1}
       </p>
-      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-800 leading-tight mb-2 sm:mb-3 animate-slide-up" style={{ animationDelay: "0.1s" }}>
+      <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-green-800 leading-tight mb-2 sm:mb-3 animate-slide-up" style={{ animationDelay: "0.1s" }}>
         {banner.title2}
       </h1>
-      <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 max-w-md animate-slide-up" style={{ animationDelay: "0.2s" }}>
+      <p className="hidden md:block text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 max-w-md animate-slide-up" style={{ animationDelay: "0.2s" }}>
         {banner.copy}
       </p>
 
@@ -283,15 +240,17 @@ export default function Home() {
           </div>
         ))}
       </div>
-
-      <button className="flex items-center gap-1 bg-green-700 hover:bg-green-800 transition-all duration-300 text-white text-sm sm:text-base font-medium px-5 sm:px-6 py-2 sm:py-2.5 rounded-full hover-scale animate-slide-up group" style={{ animationDelay: "0.5s" }}>
+      <NavLink to={banner.path}>
+       <button className=" hidden md:block flex items-center gap-1 bg-green-700 hover:bg-green-800 transition-all duration-300 text-white text-sm sm:text-base font-medium px-5 sm:px-6  py-2 sm:py-2.5 rounded-full hover-scale animate-slide-up group" style={{ animationDelay: "0.5s" }}>
         {banner.cta}
-        <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-      </button>
+       
+       </button>
+      </NavLink>
+    
     </div>
 
     {/* Right Content - Image with INCREASED SIZE ONLY */}
-    <div className="absolute right-0 sm:right-1 md:right-4 lg:right-10 top-1/2 -translate-y-1/2 z-10 w-[58%] sm:w-[55%] md:w-[52%] lg:w-[50%] flex items-center justify-center h-full">
+    <div className="absolute right-3 sm:right-1 md:right-4 lg:right-10 top-1/2 -translate-y-1/2 z-10 w-[50%] sm:w-[55%] md:w-[52%] lg:w-[50%] flex items-center justify-center h-full">
       <div className="animate-scale-in w-full h-full flex items-center justify-center">
         <img
           src={banner.image}
@@ -301,7 +260,7 @@ export default function Home() {
       </div>
       
       {/* 100% Badge with Border, Shadow and Dancing Animation */}
-      <div className="absolute top-1/2 -translate-y-1/2 -right-1 sm:-right-2 md:-right-3 lg:-right-10 bg-white rounded-full w-20 h-20 sm:w-24 sm:h-24 md:w-26 md:h-26 lg:w-28 lg:h-28 flex flex-col items-center justify-center text-center shadow-2xl animate-badge-dance p-[3px] bg-gradient-to-r from-green-300 via-orange-300 to-green-300">
+      <div className="hidden md:block absolute top-1/2 -translate-y-1/2 -right-1 sm:-right-2 md:-right-3 lg:-right-10 bg-white rounded-full w-20 h-20 sm:w-24 sm:h-24 md:w-26 md:h-26 lg:w-28 lg:h-28 flex flex-col items-center justify-center text-center shadow-2xl animate-badge-dance p-[3px] bg-gradient-to-r from-green-300 via-orange-300 to-green-300">
         <div className="w-full h-full bg-white rounded-full flex flex-col items-center justify-center text-center">
           <div className="relative">
             <div className="absolute inset-0 bg-green-500/10 rounded-full animate-ping-slow"></div>
@@ -354,7 +313,7 @@ export default function Home() {
   </div>
 
   <div className="relative z-10 mx-auto">
-    <div className="text-center mb-8 sm:mb-10 md:mb-12">
+    <div className="text-center mb-2 sm:mb-10 md:mb-12">
       <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-light text-orange-400 tracking-[0.2em] text-gray-900 mb-4 animate-slide-down">
         SHOP BY CATEGORIES
       </h2>
@@ -362,7 +321,7 @@ export default function Home() {
      
     </div>
 
-    <div className="flex flex-row sm:gap-5 md:gap-10 justify-center mx-auto">
+    <div className="grid grid-cols-2 gap-x-1 sm:flex sm:flex-row sm:gap-5 md:gap-10 justify-items-center sm:justify-center mx-auto">
       {CATEGORIES.map((cat, index) => (
         <div 
           key={cat.name}
@@ -379,7 +338,7 @@ export default function Home() {
             {/* Inner pulsing ring */}
             <div className="absolute inset-[-4px] rounded-full bg-gradient-to-r from-green-400/0 via-orange-400/20 to-green-400/0 opacity-0 group-hover:opacity-100 animate-pulse-ring"></div>
             
-            <div className="relative w-36 h-36 md:w-40 md:h-40 lg:w-55 lg:h-55 rounded-full overflow-hidden border-[3px] border-white shadow-2xl transition-transform duration-1000 group-hover:rotate-[-180deg] bg-gradient-to-br from-green-100 via-amber-50 to-green-200">
+            <div className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-55 lg:h-55 rounded-full overflow-hidden border-[3px] border-white shadow-2xl transition-transform duration-1000 group-hover:rotate-[-180deg] bg-gradient-to-br from-green-100 via-amber-50 to-green-200">
               <img 
                 src={cat.image} 
                 alt={cat.name} 
@@ -398,11 +357,11 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-6 sm:mt-8 md:mt-10 text-center">
+          <div className="mt-0 sm:mt-8 md:mt-10 text-center">
             {/* Decorative line above title */}
             <div className="w-0 h-0.5 bg-gradient-to-r from-green-400 via-amber-500 to-green-400 mx-auto group-hover:w-12 transition-all duration-700 mb-3"></div>
             
-            <h3 className="text-xl sm:text-2xl font-serif font-light text-green-600 tracking-wider mb-3 sm:mb-4 transition-all duration-300 group-hover:text-amber-700 group-hover:scale-105 group-hover:tracking-widest">
+            <h3 className="text-base sm:text-2xl font-serif font-light text-green-600 tracking-wider mb-3 sm:mb-4 transition-all duration-300 group-hover:text-amber-700 group-hover:scale-105 group-hover:tracking-widest">
               {cat.name}
             </h3>
             
@@ -423,51 +382,6 @@ export default function Home() {
   </div>
 </section>
 
-
-
-
-      {/* Features - Full Width
-      <section className="w-full px-4 sm:px-6 lg:px-8 mt-10 mb-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 border-t border-gray-100 pt-6">
-          {FEATURES.map((f, index) => (
-            <div key={f.title} className="flex items-center gap-3 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-              <f.icon className="w-6 h-6 text-green-600 shrink-0" />
-              <div className="leading-tight">
-                <p className="text-sm font-semibold text-gray-700">{f.title}</p>
-                <p className="text-xs text-gray-400">{f.sub}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section> */}
-
-       {/* Promo Cards - Full Width
-      <section className="w-full px-4 sm:px-6 lg:px-8 mt-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {PROMO_CARDS.map((card, index) => (
-            <div
-              key={card.title1}
-              className={`relative rounded-2xl bg-gradient-to-br ${card.from} ${card.to} p-5 overflow-hidden flex flex-col justify-between min-h-[190px] hover-lift animate-scale-in`}
-              style={{ animationDelay: `${index * 0.15}s` }}
-            >
-              <div>
-                <h3 className={`font-bold text-lg leading-snug ${card.titleColor}`}>
-                  {card.title1}
-                  <br />
-                  {card.title2}
-                </h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  Up to <span className="font-semibold">{card.off}% Off</span>
-                </p>
-              </div>
-              <button className={`mt-4 w-fit ${card.btn} text-white text-xs font-medium px-4 py-2 rounded-full transition-colors hover-scale`}>
-                {card.cta}
-              </button>
-              <img src={card.image} alt={card.title1} className="absolute -right-2 bottom-0 w-24 h-24 object-cover rounded-xl opacity-90" />
-            </div>
-          ))}
-        </div>
-      </section> */}
 
 
        {/* Animation Styles */}

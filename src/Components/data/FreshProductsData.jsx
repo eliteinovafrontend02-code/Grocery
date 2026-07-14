@@ -618,8 +618,7 @@ export const products = [
     image: [
       "/fresh-products/Products/fp28.png",
       "/fresh-products/Products/fp28_1.png",
-      "/fresh-products/Products/fp28_2.png",
-      "/fresh-products/Products/fp28_3.png"
+     
     ],
     isOrganic: false,
     inStock: true,
@@ -641,8 +640,7 @@ export const products = [
     image: [
       "/fresh-products/Products/fp29.png",
       "/fresh-products/Products/fp29_1.png",
-      "/fresh-products/Products/fp29_2.png",
-      "/fresh-products/Products/fp29_3.png"
+      
     ],
     isOrganic: true,
     inStock: true,
@@ -664,8 +662,7 @@ export const products = [
     image: [
       "/fresh-products/Products/fp30.png",
       "/fresh-products/Products/fp30_1.png",
-      "/fresh-products/Products/fp30_2.png",
-      "/fresh-products/Products/fp30_3.png"
+      
     ],
     isOrganic: true,
     inStock: true,

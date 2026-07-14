@@ -134,7 +134,7 @@ export const products = [
     reviews: 189,
     image: [
       "/dairy-snacks/Products/dp7.png",
-      "/dairy-snacks/Products/dp7_1.png",
+      
     ],
     inStock: true,
     discount: 18,
@@ -154,7 +154,7 @@ export const products = [
     reviews: 156,
     image: [
       "/dairy-snacks/Products/dp8.png",
-      "/dairy-snacks/Products/dp8_1.png",
+     
     ],
     inStock: true,
     discount: 20,
@@ -176,7 +176,7 @@ export const products = [
     reviews: 234,
     image: [
       "/dairy-snacks/Products/dp9.png",
-      "/dairy-snacks/Products/dp9_1.png",
+      
     ],
     inStock: true,
     discount: 22,
@@ -196,7 +196,7 @@ export const products = [
     reviews: 189,
     image: [
       "/dairy-snacks/Products/dp10.png",
-      "/dairy-snacks/Products/dp10_1.png",
+     
     ],
     inStock: true,
     discount: 20,
@@ -216,7 +216,7 @@ export const products = [
     reviews: 167,
     image: [
       "/dairy-snacks/Products/dp11.png",
-      "/dairy-snacks/Products/dp11_1.png",
+      
     ],
     inStock: true,
     discount: 20,
@@ -236,7 +236,7 @@ export const products = [
     reviews: 234,
     image: [
       "/dairy-snacks/Products/dp12.png",
-      "/dairy-snacks/Products/dp12_1.png",
+     
     ],
     inStock: true,
     discount: 20,
@@ -256,7 +256,7 @@ export const products = [
     reviews: 145,
     image: [
       "/dairy-snacks/Products/dp13.png",
-      "/dairy-snacks/Products/dp13_1.png",
+      
     ],
     inStock: true,
     discount: 17,
@@ -276,7 +276,7 @@ export const products = [
     reviews: 198,
     image: [
       "/dairy-snacks/Products/dp14.png",
-      "/dairy-snacks/Products/dp14_1.png",
+      
     ],
     inStock: true,
     discount: 21,
@@ -387,11 +387,11 @@ export const products = [
     stockQuantity: 45,
   },
 
-  // ==================== NAMKEEN & SAVORY ====================
+  // ==================== SAVORY SNACKS ====================
   {
     id: 20,
     name: "Mixture (Spicy Mix)",
-    category: "namkeen",
+    category: "savory",
     subCategory: "mixture",
     price: 120,
     originalPrice: 150,
@@ -400,7 +400,7 @@ export const products = [
     reviews: 234,
     image: [
       "/dairy-snacks/Products/dp20.png",
-      "/dairy-snacks/Products/dp20_1.png",
+      
     ],
     inStock: true,
     discount: 20,
@@ -411,7 +411,7 @@ export const products = [
   {
     id: 21,
     name: "Kara Sev (Spicy Sev)",
-    category: "namkeen",
+    category: "savory",
     subCategory: "sev",
     price: 100,
     originalPrice: 125,
@@ -420,7 +420,7 @@ export const products = [
     reviews: 189,
     image: [
       "/dairy-snacks/Products/dp21.png",
-      "/dairy-snacks/Products/dp21_1.png",
+      
     ],
     inStock: true,
     discount: 20,
@@ -431,7 +431,7 @@ export const products = [
   {
     id: 22,
     name: "Chekkalu (Crispy Crackers)",
-    category: "namkeen",
+    category: "savory",
     subCategory: "chekkalu",
     price: 110,
     originalPrice: 140,
@@ -440,7 +440,7 @@ export const products = [
     reviews: 156,
     image: [
       "/dairy-snacks/Products/dp22.png",
-      "/dairy-snacks/Products/dp22_1.png",
+      
     ],
     inStock: true,
     discount: 21,
@@ -460,7 +460,7 @@ export const products = [
     reviews: 134,
     image: [
       "/dairy-snacks/Products/dp23.png",
-      "/dairy-snacks/Products/dp23_1.png",
+     
     ],
     inStock: true,
     discount: 18,
@@ -502,7 +502,7 @@ export const products = [
     reviews: 178,
     image: [
       "/dairy-snacks/Products/dp25.png",
-      "/dairy-snacks/Products/dp25_1.png",
+     
     ],
     inStock: true,
     discount: 18,
@@ -522,7 +522,7 @@ export const products = [
     reviews: 145,
     image: [
       "/dairy-snacks/Products/dp26.png",
-      "/dairy-snacks/Products/dp26_1.png",
+      
     ],
     inStock: true,
     discount: 17,
@@ -542,7 +542,7 @@ export const products = [
     reviews: 198,
     image: [
       "/dairy-snacks/Products/dp27.png",
-      "/dairy-snacks/Products/dp27_1.png",
+     
     ],
     inStock: true,
     discount: 19,
@@ -558,7 +558,7 @@ export const categories = [
   { id: "dairy", name: "Dairy Products", icon: "🥛" },
   { id: "snacks", name: "Snacks", icon: "🍿" },
   { id: "sweets", name: "Sweets", icon: "🍬" },
-  { id: "namkeen", name: "Namkeen", icon: "🥨" },
+  { id: "savory", name: "Savory Snacks", icon: "🥨" },
 ];
 
 // Helper functions
