@@ -166,7 +166,7 @@ const SpicesAndDryFruits = () => {
       title1: "Pure",
       title2: "Spices & Blends",
       copy: "Authentic spices and masala blends to elevate your cooking. Freshly ground for maximum flavor.",
-      image: "/spices-dryfruits/sbanner1.png",
+      image: "/spices-dryfruits/sbanner1.webp",
       tags: [
         { icon: Leaf, label: "Pure & Natural", sub: "No Additives" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
@@ -178,7 +178,7 @@ const SpicesAndDryFruits = () => {
       title1: "Premium",
       title2: "Dry Fruits & Nuts",
       copy: "Premium quality dry fruits and nuts sourced from the finest farms. Packed with nutrition.",
-      image: "/spices-dryfruits/sbanner2.png",
+      image: "/spices-dryfruits/sbanner2.webp",
       tags: [
         { icon: Leaf, label: "Premium Quality", sub: "100% Natural" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
@@ -190,7 +190,7 @@ const SpicesAndDryFruits = () => {
       title1: "Organic",
       title2: "Seeds & Cloves",
       copy: "Premium seeds, cloves, and cardamom for your kitchen. Aromatic and flavorful.",
-      image: "/spices-dryfruits/sbanner3.png",
+      image: "/spices-dryfruits/sbanner3.webp",
       tags: [
         { icon: Leaf, label: "Organic", sub: "Chemical Free" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },

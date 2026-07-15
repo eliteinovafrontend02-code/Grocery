@@ -13,7 +13,7 @@ export const products = [
     rating: 4.5,
     reviews: 128,
     image: [
-      "/fresh-products/Products/fp1.png",
+      "/fresh-products/Products/fp1.webp",
      
      
     ],
@@ -35,7 +35,7 @@ export const products = [
     rating: 4.3,
     reviews: 95,
     image: [
-      "/fresh-products/Products/fp2.png",
+      "/fresh-products/Products/fp2.webp",
       
      
     ],
@@ -57,7 +57,7 @@ export const products = [
     rating: 4.7,
     reviews: 156,
     image: [
-      "/fresh-products/Products/fp3.png",
+      "/fresh-products/Products/fp3.webp",
       
       
     ],
@@ -79,7 +79,7 @@ export const products = [
     rating: 4.8,
     reviews: 203,
     image: [
-      "/fresh-products/Products/fp4.png",
+      "/fresh-products/Products/fp4.webp",
       
      
     ],
@@ -101,7 +101,7 @@ export const products = [
     rating: 4.4,
     reviews: 87,
     image: [
-      "/fresh-products/Products/fp5.png",
+      "/fresh-products/Products/fp5.webp",
      
       
     ],
@@ -123,7 +123,7 @@ export const products = [
     rating: 4.9,
     reviews: 312,
     image: [
-      "/fresh-products/Products/fp6.png",
+      "/fresh-products/Products/fp6.webp",
      
      
     ],
@@ -145,8 +145,8 @@ export const products = [
     rating: 4.6,
     reviews: 94,
     image: [
-      "/fresh-products/Products/fp7.png",
-      "/fresh-products/Products/fp7_1.png",
+      "/fresh-products/Products/fp7.webp",
+      "/fresh-products/Products/fp7_1.webp",
      
     ],
     isOrganic: true,
@@ -167,7 +167,7 @@ export const products = [
     rating: 4.2,
     reviews: 67,
     image: [
-      "/fresh-products/Products/fp8.png",
+      "/fresh-products/Products/fp8.webp",
       
       
     ],
@@ -189,7 +189,7 @@ export const products = [
     rating: 4.1,
     reviews: 56,
     image: [
-      "/fresh-products/Products/fp9.png",
+      "/fresh-products/Products/fp9.webp",
      
      
     ],
@@ -213,7 +213,7 @@ export const products = [
     rating: 4.2,
     reviews: 76,
     image: [
-      "/fresh-products/Products/fp10.png",
+      "/fresh-products/Products/fp10.webp",
       
       
     ],
@@ -235,7 +235,7 @@ export const products = [
     rating: 4.6,
     reviews: 112,
     image: [
-      "/fresh-products/Products/fp11.png",
+      "/fresh-products/Products/fp11.webp",
       
   
     ],
@@ -257,7 +257,7 @@ export const products = [
     rating: 4.3,
     reviews: 64,
     image: [
-      "/fresh-products/Products/fp12.png",
+      "/fresh-products/Products/fp12.webp",
      
      
     ],
@@ -279,7 +279,7 @@ export const products = [
     rating: 4.7,
     reviews: 98,
     image: [
-      "/fresh-products/Products/fp13.png",
+      "/fresh-products/Products/fp13.webp",
      
     
     ],
@@ -301,8 +301,8 @@ export const products = [
     rating: 4.1,
     reviews: 53,
     image: [
-      "/fresh-products/Products/fp14.png",
-      "/fresh-products/Products/fp14_1.png",
+      "/fresh-products/Products/fp14.webp",
+      "/fresh-products/Products/fp14_1.webp",
      
     ],
     isOrganic: false,
@@ -323,8 +323,8 @@ export const products = [
     rating: 4.0,
     reviews: 42,
     image: [
-      "/fresh-products/Products/fp15.png",
-      "/fresh-products/Products/fp15_1.png",
+      "/fresh-products/Products/fp15.webp",
+      "/fresh-products/Products/fp15_1.webp",
       
     ],
     isOrganic: true,
@@ -345,8 +345,8 @@ export const products = [
     rating: 4.0,
     reviews: 38,
     image: [
-      "/fresh-products/Products/fp16.png",
-      "/fresh-products/Products/fp16_1.png",
+      "/fresh-products/Products/fp16.webp",
+      "/fresh-products/Products/fp16_1.webp",
      
     ],
     isOrganic: false,
@@ -367,8 +367,8 @@ export const products = [
     rating: 4.2,
     reviews: 49,
     image: [
-      "/fresh-products/Products/fp17.png",
-      "/fresh-products/Products/fp17_1.png",
+      "/fresh-products/Products/fp17.webp",
+      "/fresh-products/Products/fp17_1.webp",
       
     ],
     isOrganic: true,
@@ -389,8 +389,8 @@ export const products = [
     rating: 4.0,
     reviews: 85,
     image: [
-      "/fresh-products/Products/fp18.png",
-      "/fresh-products/Products/fp18_1.png",
+      "/fresh-products/Products/fp18.webp",
+      "/fresh-products/Products/fp18_1.webp",
       
     ],
     isOrganic: false,
@@ -413,8 +413,8 @@ export const products = [
     rating: 4.9,
     reviews: 78,
     image: [
-      "/fresh-products/Products/fp19.png",
-      "/fresh-products/Products/fp19_1.png",
+      "/fresh-products/Products/fp19.webp",
+      "/fresh-products/Products/fp19_1.webp",
      
     ],
     isOrganic: true,
@@ -435,8 +435,8 @@ export const products = [
     rating: 4.6,
     reviews: 45,
     image: [
-      "/fresh-products/Products/fp20.png",
-      "/fresh-products/Products/fp20_1.png",
+      "/fresh-products/Products/fp20.webp",
+      "/fresh-products/Products/fp20_1.webp",
      
     ],
     isOrganic: true,
@@ -457,8 +457,8 @@ export const products = [
     rating: 4.4,
     reviews: 34,
     image: [
-      "/fresh-products/Products/fp21.png",
-      "/fresh-products/Products/fp21_1.png",
+      "/fresh-products/Products/fp21.webp",
+      "/fresh-products/Products/fp21_1.webp",
       
     ],
     isOrganic: false,
@@ -481,8 +481,8 @@ export const products = [
     rating: 4.7,
     reviews: 67,
     image: [
-      "/fresh-products/Products/fp22.png",
-      "/fresh-products/Products/fp22_1.png",
+      "/fresh-products/Products/fp22.webp",
+      "/fresh-products/Products/fp22_1.webp",
      
     ],
     isOrganic: true,
@@ -503,8 +503,8 @@ export const products = [
     rating: 4.8,
     reviews: 89,
     image: [
-      "/fresh-products/Products/fp23.png",
-      "/fresh-products/Products/fp23_1.png",
+      "/fresh-products/Products/fp23.webp",
+      "/fresh-products/Products/fp23_1.webp",
       
     ],
     isOrganic: true,
@@ -525,8 +525,8 @@ export const products = [
     rating: 4.6,
     reviews: 56,
     image: [
-      "/fresh-products/Products/fp24.png",
-      "/fresh-products/Products/fp24_1.png",
+      "/fresh-products/Products/fp24.webp",
+      "/fresh-products/Products/fp24_1.webp",
       
     ],
     isOrganic: true,
@@ -549,8 +549,8 @@ export const products = [
     rating: 4.3,
     reviews: 72,
     image: [
-      "/fresh-products/Products/fp25.png",
-      "/fresh-products/Products/fp25_1.png",
+      "/fresh-products/Products/fp25.webp",
+      "/fresh-products/Products/fp25_1.webp",
     
     ],
     isOrganic: true,
@@ -571,8 +571,8 @@ export const products = [
     rating: 4.4,
     reviews: 54,
     image: [
-      "/fresh-products/Products/fp26.png",
-      "/fresh-products/Products/fp26_1.png",
+      "/fresh-products/Products/fp26.webp",
+      "/fresh-products/Products/fp26_1.webp",
      
     ],
     isOrganic: true,
@@ -593,7 +593,7 @@ export const products = [
     rating: 4.2,
     reviews: 43,
     image: [
-      "/fresh-products/Products/fp27.png",
+      "/fresh-products/Products/fp27.webp",
     
     ],
     isOrganic: true,
@@ -616,8 +616,8 @@ export const products = [
     rating: 4.1,
     reviews: 92,
     image: [
-      "/fresh-products/Products/fp28.png",
-      "/fresh-products/Products/fp28_1.png",
+      "/fresh-products/Products/fp28.webp",
+      "/fresh-products/Products/fp28_1.webp",
      
     ],
     isOrganic: false,
@@ -638,8 +638,8 @@ export const products = [
     rating: 4.5,
     reviews: 52,
     image: [
-      "/fresh-products/Products/fp29.png",
-      "/fresh-products/Products/fp29_1.png",
+      "/fresh-products/Products/fp29.webp",
+      "/fresh-products/Products/fp29_1.webp",
       
     ],
     isOrganic: true,
@@ -660,8 +660,8 @@ export const products = [
     rating: 4.3,
     reviews: 67,
     image: [
-      "/fresh-products/Products/fp30.png",
-      "/fresh-products/Products/fp30_1.png",
+      "/fresh-products/Products/fp30.webp",
+      "/fresh-products/Products/fp30_1.webp",
       
     ],
     isOrganic: true,

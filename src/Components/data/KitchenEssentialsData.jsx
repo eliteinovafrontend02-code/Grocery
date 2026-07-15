@@ -13,7 +13,7 @@ export const products = [
     rating: 4.8,
     reviews: 245,
     image: [
-      "/kitchen-essentials/Products/kp1.png",
+      "/kitchen-essentials/Products/kp1.webp",
      
     ],
     inStock: true,
@@ -33,7 +33,7 @@ export const products = [
     rating: 4.6,
     reviews: 178,
     image: [
-      "/kitchen-essentials/Products/kp2.png",
+      "/kitchen-essentials/Products/kp2.webp",
     
     ],
     inStock: true,
@@ -53,7 +53,7 @@ export const products = [
     rating: 4.4,
     reviews: 156,
     image: [
-      "/kitchen-essentials/Products/kp3.png",
+      "/kitchen-essentials/Products/kp3.webp",
       
     ],
     inStock: true,
@@ -73,7 +73,7 @@ export const products = [
     rating: 4.7,
     reviews: 89,
     image: [
-      "/kitchen-essentials/Products/kp4.png",
+      "/kitchen-essentials/Products/kp4.webp",
       
     ],
     inStock: true,
@@ -93,7 +93,7 @@ export const products = [
     rating: 4.5,
     reviews: 67,
     image: [
-      "/kitchen-essentials/Products/kp5.png",
+      "/kitchen-essentials/Products/kp5.webp",
       
     ],
     inStock: true,
@@ -115,7 +115,7 @@ export const products = [
     rating: 4.3,
     reviews: 234,
     image: [
-      "/kitchen-essentials/Products/kp6.png",
+      "/kitchen-essentials/Products/kp6.webp",
       
     ],
     inStock: true,
@@ -135,7 +135,7 @@ export const products = [
     rating: 4.6,
     reviews: 189,
     image: [
-      "/kitchen-essentials/Products/kp7.png",
+      "/kitchen-essentials/Products/kp7.webp",
      
     ],
     inStock: true,
@@ -155,7 +155,7 @@ export const products = [
     rating: 4.4,
     reviews: 112,
     image: [
-      "/kitchen-essentials/Products/kp8.png",
+      "/kitchen-essentials/Products/kp8.webp",
      
     ],
     inStock: true,
@@ -175,7 +175,7 @@ export const products = [
     rating: 4.2,
     reviews: 156,
     image: [
-      "/kitchen-essentials/Products/kp9.png",
+      "/kitchen-essentials/Products/kp9.webp",
       
     ],
     inStock: true,
@@ -197,7 +197,7 @@ export const products = [
     rating: 4.7,
     reviews: 145,
     image: [
-      "/kitchen-essentials/Products/kp10.png",
+      "/kitchen-essentials/Products/kp10.webp",
      
     ],
     inStock: true,
@@ -217,7 +217,7 @@ export const products = [
     rating: 4.3,
     reviews: 98,
     image: [
-      "/kitchen-essentials/Products/kp11.png",
+      "/kitchen-essentials/Products/kp11.webp",
       
     ],
     inStock: true,
@@ -237,7 +237,7 @@ export const products = [
     rating: 4.8,
     reviews: 67,
     image: [
-      "/kitchen-essentials/Products/kp12.png",
+      "/kitchen-essentials/Products/kp12.webp",
       
     ],
     inStock: true,
@@ -259,7 +259,7 @@ export const products = [
     rating: 4.7,
     reviews: 156,
     image: [
-      "/kitchen-essentials/Products/kp13.png",
+      "/kitchen-essentials/Products/kp13.webp",
       
     ],
     inStock: true,
@@ -279,7 +279,7 @@ export const products = [
     rating: 4.5,
     reviews: 234,
     image: [
-      "/kitchen-essentials/Products/kp14.png",
+      "/kitchen-essentials/Products/kp14.webp",
       
     ],
     inStock: true,
@@ -299,7 +299,7 @@ export const products = [
     rating: 4.4,
     reviews: 134,
     image: [
-      "/kitchen-essentials/Products/kp15.png",
+      "/kitchen-essentials/Products/kp15.webp",
       
     ],
     inStock: true,
@@ -319,7 +319,7 @@ export const products = [
     rating: 4.6,
     reviews: 98,
     image: [
-      "/kitchen-essentials/Products/kp16.png",
+      "/kitchen-essentials/Products/kp16.webp",
      
     ],
     inStock: true,
@@ -339,7 +339,7 @@ export const products = [
     rating: 4.3,
     reviews: 112,
     image: [
-      "/kitchen-essentials/Products/kp17.png",
+      "/kitchen-essentials/Products/kp17.webp",
      
     ],
     inStock: true,
@@ -361,7 +361,7 @@ export const products = [
     rating: 4.8,
     reviews: 167,
     image: [
-      "/kitchen-essentials/Products/kp18.png",
+      "/kitchen-essentials/Products/kp18.webp",
      
     ],
     inStock: true,
@@ -381,7 +381,7 @@ export const products = [
     rating: 4.9,
     reviews: 234,
     image: [
-      "/kitchen-essentials/Products/kp19.png",
+      "/kitchen-essentials/Products/kp19.webp",
     
     ],
     inStock: true,
@@ -401,7 +401,7 @@ export const products = [
     rating: 4.2,
     reviews: 156,
     image: [
-      "/kitchen-essentials/Products/kp20.png",
+      "/kitchen-essentials/Products/kp20.webp",
       
     ],
     inStock: true,
@@ -421,7 +421,7 @@ export const products = [
     rating: 4.7,
     reviews: 145,
     image: [
-      "/kitchen-essentials/Products/kp21.png",
+      "/kitchen-essentials/Products/kp21.webp",
       
     ],
     inStock: true,
@@ -441,7 +441,7 @@ export const products = [
     rating: 4.9,
     reviews: 312,
     image: [
-      "/kitchen-essentials/Products/kp22.png",
+      "/kitchen-essentials/Products/kp22.webp",
       
     ],
     inStock: true,
@@ -463,7 +463,7 @@ export const products = [
     rating: 4.6,
     reviews: 189,
     image: [
-      "/kitchen-essentials/Products/kp23.png",
+      "/kitchen-essentials/Products/kp23.webp",
       
     ],
     inStock: true,
@@ -483,7 +483,7 @@ export const products = [
     rating: 4.3,
     reviews: 134,
     image: [
-      "/kitchen-essentials/Products/kp24.png",
+      "/kitchen-essentials/Products/kp24.webp",
       
     ],
     inStock: true,
@@ -503,7 +503,7 @@ export const products = [
     rating: 4.5,
     reviews: 89,
     image: [
-      "/kitchen-essentials/Products/kp25.png",
+      "/kitchen-essentials/Products/kp25.webp",
       
     ],
     inStock: true,
@@ -523,7 +523,7 @@ export const products = [
     rating: 4.4,
     reviews: 67,
     image: [
-      "/kitchen-essentials/Products/kp26.png",
+      "/kitchen-essentials/Products/kp26.webp",
       
     ],
     inStock: true,
@@ -545,7 +545,7 @@ export const products = [
     rating: 4.7,
     reviews: 134,
     image: [
-      "/kitchen-essentials/Products/kp27.png",
+      "/kitchen-essentials/Products/kp27.webp",
       
     ],
     inStock: true,
@@ -565,7 +565,7 @@ export const products = [
     rating: 4.0,
     reviews: 234,
     image: [
-      "/kitchen-essentials/Products/kp28.png",
+      "/kitchen-essentials/Products/kp28.webp",
      
     ],
     inStock: true,
@@ -587,7 +587,7 @@ export const products = [
     rating: 4.5,
     reviews: 112,
     image: [
-      "/kitchen-essentials/Products/kp29.png",
+      "/kitchen-essentials/Products/kp29.webp",
       
     ],
     inStock: true,
@@ -607,7 +607,7 @@ export const products = [
     rating: 4.4,
     reviews: 89,
     image: [
-      "/kitchen-essentials/Products/kp30.png",
+      "/kitchen-essentials/Products/kp30.webp",
      
     ],
     inStock: true,

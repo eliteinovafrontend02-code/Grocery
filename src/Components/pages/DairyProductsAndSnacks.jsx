@@ -135,7 +135,7 @@ const DairyProductsAndSnacks = () => {
       title1: "Fresh",
       title2: "Dairy Products",
       copy: "Farm-fresh milk, curd, paneer, and more. Pure and nutritious dairy for your daily needs.",
-      image: "/dairy-snacks/dbanner1.png",
+      image: "/dairy-snacks/dbanner1.webp",
       tags: [
         { icon: Leaf, label: "Farm Fresh", sub: "100% Pure" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
@@ -147,7 +147,7 @@ const DairyProductsAndSnacks = () => {
       title1: "Crunchy",
       title2: "Snacks & Treats",
       copy: "Delicious and crunchy snacks for every occasion. From chips to cookies and more.",
-      image: "/dairy-snacks/dbanner2.png",
+      image: "/dairy-snacks/dbanner2.webp",
       tags: [
         { icon: Leaf, label: "Quality Snacks", sub: "Fresh & Tasty" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
@@ -159,7 +159,7 @@ const DairyProductsAndSnacks = () => {
       title1: "Healthy",
       title2: "Dairy Delights",
       copy: "Nutritious dairy products and healthy snacks for a balanced lifestyle.",
-      image: "/dairy-snacks/dbanner3.png",
+      image: "/dairy-snacks/dbanner3.webp",
       tags: [
         { icon: Leaf, label: "Healthy Choice", sub: "Nutritious & Pure" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },

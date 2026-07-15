@@ -137,11 +137,11 @@ const getCurrentTestimonials = () => {
     <div className="min-h-screen bg-gradient-to-b from-emerald-50/30 via-white to-orange-50/30 pt-24 overflow-x-hidden">
       
       {/* 🏆 HERO BANNER - Full Width with Background Image */}
-      <section className="relative w-full min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] flex items-center overflow-hidden">
+      <section className="relative w-full  min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] flex items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img 
-            src="/aboutbanner.png" 
+            src="/aboutbanner.webp" 
             alt="Grocery Items" 
             className="w-full h-full object-cover object-center"
           />
@@ -433,7 +433,7 @@ const getCurrentTestimonials = () => {
               <div className="relative bg-gradient-to-br from-emerald-50/90 to-orange-50/90 p-3 rounded-3xl shadow-2xl border border-white/60 hover:shadow-3xl transition-all duration-700 group">
                 <div className="relative overflow-hidden rounded-2xl">
                   <img 
-                    src="/abanner.png" 
+                    src="/abanner.webp" 
                     alt="Our Story" 
                     className="w-full h-[300px] sm:h-[400px] object-cover transition-all duration-1000 group-hover:scale-110"
                     onError={(e) => {
@@ -1105,7 +1105,7 @@ const getCurrentTestimonials = () => {
 <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-20 overflow-hidden">
   {/* Background with Gradient Overlay */}
   <div className="absolute inset-0">
-    <img src="/about.png" alt="CTA" className="w-full h-full object-cover" />
+    <img src="/about.webp" alt="CTA" className="w-full h-full object-cover" />
     <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/95 via-teal-800/85 to-orange-900/90"></div>
     
     {/* Animated Gradient Orbs - Smaller */}

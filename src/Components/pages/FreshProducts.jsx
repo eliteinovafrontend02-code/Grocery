@@ -269,7 +269,7 @@ const FreshProducts = () => {
       title1: "Fresh Fruits",
       title2: "& Vegetables",
       copy: "From farm-fresh produce to daily essentials, everything you need, delivered fresh!",
-      image: "/fresh-products/fbanner1.png",
+      image: "/fresh-products/fbanner1.webp",
       tags: [
         { icon: Leaf, label: "Farm Fresh", sub: "100% Natural" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
@@ -281,7 +281,7 @@ const FreshProducts = () => {
       title1: "Organic",
       title2: "Vegetables",
       copy: "Certified organic vegetables grown without pesticides. Healthy living starts here.",
-      image: "/fresh-products/fbanner2.png",
+      image: "/fresh-products/fbanner2.webp",
       tags: [
         { icon: Leaf, label: "Organic", sub: "Chemical Free" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
@@ -293,7 +293,7 @@ const FreshProducts = () => {
       title1: "Exotic",
       title2: "Fruits",
       copy: "Premium exotic fruits imported from around the world. Dragon fruit, Avocado & more.",
-      image:"/fresh-products/fbanner3.png",
+      image:"/fresh-products/fbanner3.webp",
       tags: [
         { icon: Leaf, label: "Exotic", sub: "Imported Quality" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },

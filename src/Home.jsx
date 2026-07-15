@@ -16,7 +16,7 @@ export default function Home() {
       copy: "From farm-fresh produce to daily essentials, everything you need, delivered fresh!",
       cta: "Shop Now",
       path:"/fresh-products",
-      image: "/hbanner1.png",
+      image: "/hbanner1.webp",
       badgeLine1: "100%",
       badgeLine2: "Fresh & Natural",
       tags: [
@@ -33,7 +33,7 @@ export default function Home() {
       copy: "Oils, grains, staples and everyday must-haves — all in one place, always in stock.",
       cta: "Shop Now",
       path:"/kitchen-essentials",
-      image: "/hbanner2.png",
+      image: "/hbanner2.webp",
       badgeLine1: "100%",
       badgeLine2: "Everyday Staples",
       tags: [
@@ -49,7 +49,7 @@ export default function Home() {
       copy: "Hand-picked spices and premium dry fruits sourced straight from trusted farms.",
       cta: "Shop Now",
        path:"/spices-dry-fruits",
-      image: "/hbanner3.png",
+      image: "/hbanner3.webp",
       badgeLine1: "100%",
       badgeLine2: "Pure & Natural",
       tags: [
@@ -65,7 +65,7 @@ export default function Home() {
       copy: "Farm-fresh milk, paneer and everyone's favourite snacks — delivered chilled and crisp.",
       cta: "Shop Now",
        path:"/dairy-snacks",
-      image: "/hbanner4.png",
+      image: "/hbanner4.webp",
       badgeLine1: "100%",
       badgeLine2: "Farm to Fridge",
       tags: [
@@ -81,28 +81,28 @@ export default function Home() {
       name: "Fresh Products", 
       bg: "bg-green-50", 
       ring: "ring-green-200", 
-      image: "/cfresh-products.png",
+      image: "/cfresh-products.webp",
       link: "/fresh-products"
     },
     { 
       name: "Kitchen Essentials", 
       bg: "bg-orange-50", 
       ring: "ring-orange-200", 
-      image: "/ckitchen-essentials.png",
+      image: "/ckitchen-essentials.webp",
       link: "/kitchen-essentials"
     },
     { 
       name: "Spices & Dry Fruits", 
       bg: "bg-amber-50", 
       ring: "ring-amber-200", 
-      image: "/cspices_dryfruits.png",
+      image: "/cspices_dryfruits.webp",
       link: "/spices-dry-fruits"
     },
     { 
       name: "Dairy Products & Snacks", 
       bg: "bg-blue-50", 
       ring: "ring-blue-200", 
-      image: "/cdairyproducts_snacks.png",
+      image: "/cdairyproducts_snacks.webp",
       link: "/dairy-snacks"
     },
   ];

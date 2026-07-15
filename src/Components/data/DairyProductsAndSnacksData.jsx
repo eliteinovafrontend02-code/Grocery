@@ -13,8 +13,8 @@ export const products = [
     rating: 4.8,
     reviews: 345,
     image: [
-      "/dairy-snacks/Products/dp1.png",
-      "/dairy-snacks/Products/dp1_1.png",
+      "/dairy-snacks/Products/dp1.webp",
+      "/dairy-snacks/Products/dp1_1.webp",
     ],
     inStock: true,
     discount: 14,
@@ -33,8 +33,8 @@ export const products = [
     rating: 4.6,
     reviews: 289,
     image: [
-      "/dairy-snacks/Products/dp2.png",
-      "/dairy-snacks/Products/dp2_1.png",
+      "/dairy-snacks/Products/dp2.webp",
+      "/dairy-snacks/Products/dp2_1.webp",
     ],
     inStock: true,
     discount: 18,
@@ -53,8 +53,8 @@ export const products = [
     rating: 4.7,
     reviews: 234,
     image: [
-      "/dairy-snacks/Products/dp3.png",
-      "/dairy-snacks/Products/dp3_1.png",
+      "/dairy-snacks/Products/dp3.webp",
+      "/dairy-snacks/Products/dp3_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -73,8 +73,8 @@ export const products = [
     rating: 4.9,
     reviews: 312,
     image: [
-      "/dairy-snacks/Products/dp4.png",
-      "/dairy-snacks/Products/dp4_1.png",
+      "/dairy-snacks/Products/dp4.webp",
+      "/dairy-snacks/Products/dp4_1.webp",
     ],
     inStock: true,
     discount: 18,
@@ -93,8 +93,8 @@ export const products = [
     rating: 4.8,
     reviews: 278,
     image: [
-      "/dairy-snacks/Products/dp5.png",
-      "/dairy-snacks/Products/dp5_1.png",
+      "/dairy-snacks/Products/dp5.webp",
+      "/dairy-snacks/Products/dp5_1.webp",
     ],
     inStock: true,
     discount: 15,
@@ -113,8 +113,8 @@ export const products = [
     rating: 4.9,
     reviews: 345,
     image: [
-      "/dairy-snacks/Products/dp6.png",
-      "/dairy-snacks/Products/dp6_1.png",
+      "/dairy-snacks/Products/dp6.webp",
+      "/dairy-snacks/Products/dp6_1.webp",
     ],
     inStock: true,
     discount: 18,
@@ -133,7 +133,7 @@ export const products = [
     rating: 4.6,
     reviews: 189,
     image: [
-      "/dairy-snacks/Products/dp7.png",
+      "/dairy-snacks/Products/dp7.webp",
       
     ],
     inStock: true,
@@ -153,7 +153,7 @@ export const products = [
     rating: 4.5,
     reviews: 156,
     image: [
-      "/dairy-snacks/Products/dp8.png",
+      "/dairy-snacks/Products/dp8.webp",
      
     ],
     inStock: true,
@@ -175,7 +175,7 @@ export const products = [
     rating: 4.4,
     reviews: 234,
     image: [
-      "/dairy-snacks/Products/dp9.png",
+      "/dairy-snacks/Products/dp9.webp",
       
     ],
     inStock: true,
@@ -195,7 +195,7 @@ export const products = [
     rating: 4.3,
     reviews: 189,
     image: [
-      "/dairy-snacks/Products/dp10.png",
+      "/dairy-snacks/Products/dp10.webp",
      
     ],
     inStock: true,
@@ -215,7 +215,7 @@ export const products = [
     rating: 4.5,
     reviews: 167,
     image: [
-      "/dairy-snacks/Products/dp11.png",
+      "/dairy-snacks/Products/dp11.webp",
       
     ],
     inStock: true,
@@ -235,7 +235,7 @@ export const products = [
     rating: 4.7,
     reviews: 234,
     image: [
-      "/dairy-snacks/Products/dp12.png",
+      "/dairy-snacks/Products/dp12.webp",
      
     ],
     inStock: true,
@@ -255,7 +255,7 @@ export const products = [
     rating: 4.4,
     reviews: 145,
     image: [
-      "/dairy-snacks/Products/dp13.png",
+      "/dairy-snacks/Products/dp13.webp",
       
     ],
     inStock: true,
@@ -275,7 +275,7 @@ export const products = [
     rating: 4.6,
     reviews: 198,
     image: [
-      "/dairy-snacks/Products/dp14.png",
+      "/dairy-snacks/Products/dp14.webp",
       
     ],
     inStock: true,
@@ -297,8 +297,8 @@ export const products = [
     rating: 4.9,
     reviews: 345,
     image: [
-      "/dairy-snacks/Products/dp15.png",
-      "/dairy-snacks/Products/dp15_1.png",
+      "/dairy-snacks/Products/dp15.webp",
+      "/dairy-snacks/Products/dp15_1.webp",
     ],
     inStock: true,
     discount: 20,
@@ -317,8 +317,8 @@ export const products = [
     rating: 4.8,
     reviews: 289,
     image: [
-      "/dairy-snacks/Products/dp16.png",
-      "/dairy-snacks/Products/dp16_1.png",
+      "/dairy-snacks/Products/dp16.webp",
+      "/dairy-snacks/Products/dp16_1.webp",
     ],
     inStock: true,
     discount: 20,
@@ -337,8 +337,8 @@ export const products = [
     rating: 4.7,
     reviews: 234,
     image: [
-      "/dairy-snacks/Products/dp17.png",
-      "/dairy-snacks/Products/dp17_1.png",
+      "/dairy-snacks/Products/dp17.webp",
+      "/dairy-snacks/Products/dp17_1.webp",
     ],
     inStock: true,
     discount: 20,
@@ -357,8 +357,8 @@ export const products = [
     rating: 4.9,
     reviews: 198,
     image: [
-      "/dairy-snacks/Products/dp18.png",
-      "/dairy-snacks/Products/dp18_1.png",
+      "/dairy-snacks/Products/dp18.webp",
+      "/dairy-snacks/Products/dp18_1.webp",
     ],
     inStock: true,
     discount: 18,
@@ -377,8 +377,8 @@ export const products = [
     rating: 4.6,
     reviews: 167,
     image: [
-      "/dairy-snacks/Products/dp19.png",
-      "/dairy-snacks/Products/dp19_1.png",
+      "/dairy-snacks/Products/dp19.webp",
+      "/dairy-snacks/Products/dp19_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -399,7 +399,7 @@ export const products = [
     rating: 4.5,
     reviews: 234,
     image: [
-      "/dairy-snacks/Products/dp20.png",
+      "/dairy-snacks/Products/dp20.webp",
       
     ],
     inStock: true,
@@ -419,7 +419,7 @@ export const products = [
     rating: 4.4,
     reviews: 189,
     image: [
-      "/dairy-snacks/Products/dp21.png",
+      "/dairy-snacks/Products/dp21.webp",
       
     ],
     inStock: true,
@@ -439,7 +439,7 @@ export const products = [
     rating: 4.6,
     reviews: 156,
     image: [
-      "/dairy-snacks/Products/dp22.png",
+      "/dairy-snacks/Products/dp22.webp",
       
     ],
     inStock: true,
@@ -459,7 +459,7 @@ export const products = [
     rating: 4.3,
     reviews: 134,
     image: [
-      "/dairy-snacks/Products/dp23.png",
+      "/dairy-snacks/Products/dp23.webp",
      
     ],
     inStock: true,
@@ -481,8 +481,8 @@ export const products = [
     rating: 4.7,
     reviews: 234,
     image: [
-      "/dairy-snacks/Products/dp24.png",
-      "/dairy-snacks/Products/dp24_1.png",
+      "/dairy-snacks/Products/dp24.webp",
+      "/dairy-snacks/Products/dp24_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -501,7 +501,7 @@ export const products = [
     rating: 4.4,
     reviews: 178,
     image: [
-      "/dairy-snacks/Products/dp25.png",
+      "/dairy-snacks/Products/dp25.webp",
      
     ],
     inStock: true,
@@ -521,7 +521,7 @@ export const products = [
     rating: 4.5,
     reviews: 145,
     image: [
-      "/dairy-snacks/Products/dp26.png",
+      "/dairy-snacks/Products/dp26.webp",
       
     ],
     inStock: true,
@@ -541,7 +541,7 @@ export const products = [
     rating: 4.6,
     reviews: 198,
     image: [
-      "/dairy-snacks/Products/dp27.png",
+      "/dairy-snacks/Products/dp27.webp",
      
     ],
     inStock: true,

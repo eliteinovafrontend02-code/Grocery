@@ -13,8 +13,8 @@ export const products = [
     rating: 4.7,
     reviews: 245,
     image: [
-      "/spices-dryfruits/Products/sp1.png",
-      "/spices-dryfruits/Products/sp1_1.png",
+      "/spices-dryfruits/Products/sp1.webp",
+      "/spices-dryfruits/Products/sp1_1.webp",
     ],
     inStock: true,
     discount: 18,
@@ -33,8 +33,8 @@ export const products = [
     rating: 4.8,
     reviews: 312,
     image: [
-      "/spices-dryfruits/Products/sp2.png",
-      "/spices-dryfruits/Products/sp2_1.png",
+      "/spices-dryfruits/Products/sp2.webp",
+      "/spices-dryfruits/Products/sp2_1.webp",
     ],
     inStock: true,
     discount: 20,
@@ -53,8 +53,8 @@ export const products = [
     rating: 4.6,
     reviews: 189,
     image: [
-      "/spices-dryfruits/Products/sp3.png",
-      "/spices-dryfruits/Products/sp3_1.png",
+      "/spices-dryfruits/Products/sp3.webp",
+      "/spices-dryfruits/Products/sp3_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -73,8 +73,8 @@ export const products = [
     rating: 4.4,
     reviews: 156,
     image: [
-      "/spices-dryfruits/Products/sp4.png",
-      "/spices-dryfruits/Products/sp4_1.png",
+      "/spices-dryfruits/Products/sp4.webp",
+      "/spices-dryfruits/Products/sp4_1.webp",
     ],
     inStock: true,
     discount: 15,
@@ -93,8 +93,8 @@ export const products = [
     rating: 4.9,
     reviews: 278,
     image: [
-      "/spices-dryfruits/Products/sp5.png",
-      "/spices-dryfruits/Products/sp5_1.png",
+      "/spices-dryfruits/Products/sp5.webp",
+      "/spices-dryfruits/Products/sp5_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -113,8 +113,8 @@ export const products = [
     rating: 4.3,
     reviews: 134,
     image: [
-      "/spices-dryfruits/Products/sp6.png",
-      "/spices-dryfruits/Products/sp6_1.png",
+      "/spices-dryfruits/Products/sp6.webp",
+      "/spices-dryfruits/Products/sp6_1.webp",
     ],
     inStock: true,
     discount: 18,
@@ -133,8 +133,8 @@ export const products = [
     rating: 4.2,
     reviews: 98,
     image: [
-      "/spices-dryfruits/Products/sp7.png",
-      "/spices-dryfruits/Products/sp7_1.png",
+      "/spices-dryfruits/Products/sp7.webp",
+      "/spices-dryfruits/Products/sp7_1.webp",
     ],
     inStock: true,
     discount: 20,
@@ -153,7 +153,7 @@ export const products = [
     rating: 4.5,
     reviews: 112,
     image: [
-      "/spices-dryfruits/Products/sp8.png",
+      "/spices-dryfruits/Products/sp8.webp",
      
     ],
     inStock: true,
@@ -175,8 +175,8 @@ export const products = [
     rating: 4.8,
     reviews: 167,
     image: [
-      "/spices-dryfruits/Products/sp9.png",
-      "/spices-dryfruits/Products/sp9_1.png",
+      "/spices-dryfruits/Products/sp9.webp",
+      "/spices-dryfruits/Products/sp9_1.webp",
     ],
     inStock: true,
     discount: 18,
@@ -195,8 +195,8 @@ export const products = [
     rating: 4.9,
     reviews: 234,
     image: [
-      "/spices-dryfruits/Products/sp10.png",
-      "/spices-dryfruits/Products/sp10_1.png",
+      "/spices-dryfruits/Products/sp10.webp",
+      "/spices-dryfruits/Products/sp10_1.webp",
     ],
     inStock: true,
     discount: 16,
@@ -215,8 +215,8 @@ export const products = [
     rating: 4.7,
     reviews: 145,
     image: [
-      "/spices-dryfruits/Products/sp11.png",
-      "/spices-dryfruits/Products/sp11_1.png",
+      "/spices-dryfruits/Products/sp11.webp",
+      "/spices-dryfruits/Products/sp11_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -235,8 +235,8 @@ export const products = [
     rating: 4.6,
     reviews: 189,
     image: [
-      "/spices-dryfruits/Products/sp12.png",
-      "/spices-dryfruits/Products/sp12_1.png",
+      "/spices-dryfruits/Products/sp12.webp",
+      "/spices-dryfruits/Products/sp12_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -255,8 +255,8 @@ export const products = [
     rating: 4.5,
     reviews: 98,
     image: [
-      "/spices-dryfruits/Products/sp13.png",
-      "/spices-dryfruits/Products/sp13_1.png",
+      "/spices-dryfruits/Products/sp13.webp",
+      "/spices-dryfruits/Products/sp13_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -275,8 +275,8 @@ export const products = [
     rating: 4.4,
     reviews: 112,
     image: [
-      "/spices-dryfruits/Products/sp14.png",
-      "/spices-dryfruits/Products/sp14_1.png",
+      "/spices-dryfruits/Products/sp14.webp",
+      "/spices-dryfruits/Products/sp14_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -295,8 +295,8 @@ export const products = [
     rating: 4.6,
     reviews: 89,
     image: [
-      "/spices-dryfruits/Products/sp15.png",
-      "/spices-dryfruits/Products/sp15_1.png",
+      "/spices-dryfruits/Products/sp15.webp",
+      "/spices-dryfruits/Products/sp15_1.webp",
     ],
     inStock: true,
     discount: 15,
@@ -317,8 +317,8 @@ export const products = [
     rating: 4.9,
     reviews: 345,
     image: [
-      "/spices-dryfruits/Products/sp16.png",
-      "/spices-dryfruits/Products/sp16_1.png",
+      "/spices-dryfruits/Products/sp16.webp",
+      "/spices-dryfruits/Products/sp16_1.webp",
     ],
     inStock: true,
     discount: 19,
@@ -337,8 +337,8 @@ export const products = [
     rating: 4.8,
     reviews: 289,
     image: [
-      "/spices-dryfruits/Products/sp17.png",
-      "/spices-dryfruits/Products/sp17_1.png",
+      "/spices-dryfruits/Products/sp17.webp",
+      "/spices-dryfruits/Products/sp17_1.webp",
     ],
     inStock: true,
     discount: 19,
@@ -357,8 +357,8 @@ export const products = [
     rating: 4.7,
     reviews: 234,
     image: [
-      "/spices-dryfruits/Products/sp18.png",
-      "/spices-dryfruits/Products/sp18_1.png",
+      "/spices-dryfruits/Products/sp18.webp",
+      "/spices-dryfruits/Products/sp18_1.webp",
     ],
     inStock: true,
     discount: 20,
@@ -377,8 +377,8 @@ export const products = [
     rating: 4.9,
     reviews: 278,
     image: [
-      "/spices-dryfruits/Products/sp19.png",
-      "/spices-dryfruits/Products/sp19_1.png",
+      "/spices-dryfruits/Products/sp19.webp",
+      "/spices-dryfruits/Products/sp19_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -397,8 +397,8 @@ export const products = [
     rating: 4.7,
     reviews: 198,
     image: [
-      "/spices-dryfruits/Products/sp20.png",
-      "/spices-dryfruits/Products/sp20_1.png",
+      "/spices-dryfruits/Products/sp20.webp",
+      "/spices-dryfruits/Products/sp20_1.webp",
     ],
     inStock: true,
     discount: 20,
@@ -417,8 +417,8 @@ export const products = [
     rating: 4.5,
     reviews: 167,
     image: [
-      "/spices-dryfruits/Products/sp21.png",
-      "/spices-dryfruits/Products/sp21_1.png",
+      "/spices-dryfruits/Products/sp21.webp",
+      "/spices-dryfruits/Products/sp21_1.webp",
     ],
     inStock: true,
     discount: 20,
@@ -437,8 +437,8 @@ export const products = [
     rating: 4.6,
     reviews: 145,
     image: [
-      "/spices-dryfruits/Products/sp22.png",
-      "/spices-dryfruits/Products/sp22_1.png",
+      "/spices-dryfruits/Products/sp22.webp",
+      "/spices-dryfruits/Products/sp22_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -457,8 +457,8 @@ export const products = [
     rating: 4.4,
     reviews: 123,
     image: [
-      "/spices-dryfruits/Products/sp23.png",
-      "/spices-dryfruits/Products/sp23_1.png",
+      "/spices-dryfruits/Products/sp23.webp",
+      "/spices-dryfruits/Products/sp23_1.webp",
     ],
     inStock: true,
     discount: 17,
@@ -479,7 +479,7 @@ export const products = [
     rating: 4.3,
     reviews: 156,
     image: [
-      "/spices-dryfruits/Products/sp24.png",
+      "/spices-dryfruits/Products/sp24.webp",
       
     ],
     inStock: true,
@@ -499,7 +499,7 @@ export const products = [
     rating: 4.5,
     reviews: 134,
     image: [
-      "/spices-dryfruits/Products/sp25.png",
+      "/spices-dryfruits/Products/sp25.webp",
       
     ],
     inStock: true,
@@ -519,7 +519,7 @@ export const products = [
     rating: 4.2,
     reviews: 167,
     image: [
-      "/spices-dryfruits/Products/sp26.png",
+      "/spices-dryfruits/Products/sp26.webp",
       
     ],
     inStock: true,
@@ -539,7 +539,7 @@ export const products = [
     rating: 4.4,
     reviews: 145,
     image: [
-      "/spices-dryfruits/Products/sp27.png",
+      "/spices-dryfruits/Products/sp27.webp",
       
     ],
     inStock: true,
@@ -559,7 +559,7 @@ export const products = [
     rating: 4.7,
     reviews: 189,
     image: [
-      "/spices-dryfruits/Products/sp28.png",
+      "/spices-dryfruits/Products/sp28.webp",
      
     ],
     inStock: true,
@@ -579,7 +579,7 @@ export const products = [
     rating: 4.6,
     reviews: 112,
     image: [
-      "/spices-dryfruits/Products/sp29.png",
+      "/spices-dryfruits/Products/sp29.webp",
       
     ],
     inStock: true,
@@ -599,7 +599,7 @@ export const products = [
     rating: 4.5,
     reviews: 156,
     image: [
-      "/spices-dryfruits/Products/sp30.png",
+      "/spices-dryfruits/Products/sp30.webp",
       
     ],
     inStock: true,

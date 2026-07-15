@@ -153,7 +153,7 @@ const KitchenEssentials = () => {
       title1: "Premium",
       title2: "Rice & Wheat",
       copy: "Finest quality rice, wheat, and flour for your daily needs. Freshly milled and packed.",
-      image: "/kitchen-essentials/kbanner1.png",
+      image: "/kitchen-essentials/kbanner1.webp",
       tags: [
         { icon: Leaf, label: "Premium Quality", sub: "100% Pure" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
@@ -165,7 +165,7 @@ const KitchenEssentials = () => {
       title1: "Premium",
       title2: "Dals & Pulses",
       copy: "High-protein dals and pulses sourced from quality farms. Healthy eating made easy.",
-      image: "/kitchen-essentials/kbanner2.png",
+      image: "/kitchen-essentials/kbanner2.webp",
       tags: [
         { icon: Leaf, label: "Premium Quality", sub: "100% Pure" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
@@ -177,7 +177,7 @@ const KitchenEssentials = () => {
       title1: "Pure",
       title2: "Oils & Ghee",
       copy: "Cold-pressed oils and pure ghee to elevate your cooking experience.",
-      image: "/kitchen-essentials/kbanner3.png",
+      image: "/kitchen-essentials/kbanner3.webp",
       tags: [
         { icon: Leaf, label: "Pure & Natural", sub: "No Preservatives" },
         { icon: Truck, label: "Free Delivery", sub: "On orders above ₹499" },
