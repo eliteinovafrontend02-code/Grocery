@@ -12,6 +12,8 @@ import {
   X,
   ChevronLeft,
   ArrowLeft,
+  Info,
+  Phone,
 } from "lucide-react";
 import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 
@@ -92,17 +94,11 @@ export default function Header() {
   }, []);
 
   // Score a product against the search term.
-  // ONLY the product name and its category/subCategory are considered.
-  // Description and origin are intentionally excluded - matching against
-  // description text is how "crispy" ended up surfacing Jalebi, Potato
-  // Chips, Rusk, etc. even though the word "crispy" never appears in
-  // their name. Real product search should stay strictly on-topic.
   const scoreProduct = (product, searchTerm) => {
     const name = (product.name || "").toLowerCase();
     const category = (product.category || "").toLowerCase();
     const subCategory = (product.subCategory || "").toLowerCase();
 
-    // Word-boundary check so "cream" doesn't match inside "creamy"/"creamier"
     const escaped = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const wordBoundaryMatch = (text) => new RegExp(`\\b${escaped}`, "i").test(text);
 
@@ -116,8 +112,7 @@ export default function Header() {
     return 0;
   };
 
-  // Handle search - matches strictly against name/category/subCategory
-  // (like a real storefront's product-title search), ranked by relevance.
+  // Handle search
   const handleSearch = (query) => {
     setSearchQuery(query);
 
@@ -135,7 +130,6 @@ export default function Header() {
         return aName.length - bName.length;
       });
 
-      // Limit to 10 results for better UX
       setSearchResults(scored.slice(0, 10).map(({ product }) => product));
       setShowSearchResults(true);
     } else {
@@ -144,7 +138,6 @@ export default function Header() {
     }
   };
 
-  // Handle search submit
   const handleSearchSubmit = (e) => {
     if (e && e.preventDefault) e.preventDefault();
     if (searchQuery.trim().length > 0) {
@@ -153,15 +146,12 @@ export default function Header() {
     }
   };
 
-  // Handle product click from search results - always uses the product's
-  // own category, so it can never land on the wrong listing page.
   const handleProductClick = (product) => {
     setShowSearchResults(false);
     setSearchQuery("");
     navigate(product._routePath || "/fresh-products");
   };
 
-  // Close search results on outside click (covers both desktop & mobile bars)
   useEffect(() => {
     const handleClickOutside = (event) => {
       const clickedDesktop =
@@ -208,8 +198,6 @@ export default function Header() {
     }
   };
 
-  // Shared search-results dropdown, reused by both the desktop and
-  // mobile search bars so behavior/styling always stays in sync.
   const renderSearchDropdown = () => {
     if (showSearchResults && searchResults.length > 0) {
       return (
@@ -224,7 +212,6 @@ export default function Header() {
               </span>
             </div>
             {searchResults.map((product) => {
-              // Highlight the matching part in the product name
               const productName = product.name || "";
               const searchTerm = searchQuery.toLowerCase();
               const lowerName = productName.toLowerCase();
@@ -338,7 +325,7 @@ export default function Header() {
       {/* Top section - full width with max-width container */}
       <div className="w-full px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center gap-4 flex-wrap">
-          {/* Logo - Make it clickable to home */}
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 mr-2">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-green-100 to-orange-100 flex items-center justify-center">
               <Leaf className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
@@ -347,13 +334,12 @@ export default function Header() {
               <p className="text-lg sm:text-xl font-bold text-green-700">Grocery Items</p>
               <p className="text-[10px] sm:text-[11px] text-gray-400 -mt-1">Fresh Items to You</p>
             </div>
-            {/* Mobile logo text */}
             <div className="leading-tight sm:hidden">
               <p className="text-base font-bold text-green-700">Grocery Items</p>
             </div>
           </Link>
 
-          {/* Deliver to - hidden on mobile */}
+          {/* Deliver to */}
           <div className="hidden lg:flex items-center gap-1 text-sm text-gray-600 border-l border-gray-200 pl-4">
             <MapPin className="w-4 h-4 text-orange-500" />
             <div className="leading-tight">
@@ -362,7 +348,7 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Search - hidden on mobile, visible on larger screens */}
+          {/* Search Desktop */}
           <div
             className="hidden sm:flex flex-1 min-w-[150px] sm:min-w-[200px] relative"
             ref={desktopSearchRef}
@@ -391,13 +377,35 @@ export default function Header() {
                 <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </button>
             </form>
-
             {renderSearchDropdown()}
           </div>
 
-          {/* Right icons - responsive */}
+          {/* Right icons - Added About and Contact here */}
           <div className="flex items-center gap-3 sm:gap-5 ml-auto">
-            {/* Account - Now visible on mobile too */}
+            {/* Desktop: About and Contact Links */}
+            <div className="hidden lg:flex items-center gap-4 border-r border-gray-200 pr-4">
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `text-sm font-medium transition-colors ${
+                    isActive ? "text-green-700" : "text-gray-600 hover:text-green-700"
+                  }`
+                }
+              >
+                About
+              </NavLink>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  `text-sm font-medium transition-colors ${
+                    isActive ? "text-green-700" : "text-gray-600 hover:text-green-700"
+                  }`
+                }
+              >
+                Contact
+              </NavLink>
+            </div>
+
             <NavLink
               to="/account"
               className={({ isActive }) =>
@@ -413,7 +421,6 @@ export default function Header() {
               </div>
             </NavLink>
 
-            {/* Cart - Navigate to cart page with correct count */}
             <NavLink
               to="/cart"
               className={({ isActive }) =>
@@ -437,7 +444,6 @@ export default function Header() {
               </div>
             </NavLink>
 
-            {/* Hamburger Menu - Mobile only - Theme color */}
             <button
               onClick={toggleSidebar}
               className="sm:hidden flex items-center justify-center p-1 hover:bg-green-50 rounded-lg transition-colors"
@@ -449,10 +455,9 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Search Bar - Full width below header with Back Button on LEFT side */}
+      {/* Mobile Search Bar */}
       <div className="sm:hidden w-full px-4 pb-3">
         <div className="flex items-center gap-2 relative" ref={mobileSearchRef}>
-          {/* Back Button - LEFT side of search bar with theme color */}
           <button
             onClick={goBack}
             className="flex items-center justify-center w-10 h-10 bg-green-700 hover:bg-green-800 rounded-full transition-colors flex-shrink-0"
@@ -485,83 +490,77 @@ export default function Header() {
                 <Search className="w-4 h-4" />
               </button>
             </form>
-
             {renderSearchDropdown()}
           </div>
         </div>
       </div>
 
-      {/* Category navigation - now visible on all screen sizes */}
-<nav className="block w-full border-t border-gray-100 bg-white">
-  <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3">
-    <div className="flex items-center gap-3 sm:gap-6 flex-wrap">
-      {/* Back Button - hidden on mobile (already have one in the search bar above) */}
-      <button
-        onClick={goBack}
-        className="hidden sm:flex items-center gap-2 bg-green-50 text-orange-400 font-medium px-3 py-2 rounded-lg transition-all duration-300 whitespace-nowrap border border-green-200 hover:bg-orange-50 hover:text-green-600 hover:border-orange-200 hover:shadow-md"
-        aria-label="Go back"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        <span className="hidden lg:inline">Back</span>
-      </button>
+      {/* Category Navigation - Removed About and Contact from here */}
+      <nav className="block w-full border-t border-gray-100 bg-white">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3">
+          <div className="flex items-center gap-3 sm:gap-6 flex-wrap">
+            <button
+              onClick={goBack}
+              className="hidden sm:flex items-center gap-2 bg-green-50 text-orange-400 font-medium px-3 py-2 rounded-lg transition-all duration-300 whitespace-nowrap border border-green-200 hover:bg-orange-50 hover:text-green-600 hover:border-orange-200 hover:shadow-md"
+              aria-label="Go back"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span className="hidden lg:inline">Back</span>
+            </button>
 
-      {/* Menu button - Navigate to categories (desktop only, mobile uses hamburger) */}
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          `hidden sm:flex items-center gap-2 bg-green-700 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-green-800 transition-colors whitespace-nowrap ${
-            isActive ? "bg-green-800" : ""
-          }`
-        }
-      >
-        <Menu className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-        <span>All Categories</span>
-      </NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `hidden sm:flex items-center gap-2 bg-green-700 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-green-800 transition-colors whitespace-nowrap ${
+                  isActive ? "bg-green-800" : ""
+                }`
+              }
+            >
+              <Menu className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>All Categories</span>
+            </NavLink>
 
-      {/* Category links - scrolls horizontally on mobile */}
-      <div className="flex flex-nowrap items-center gap-3 sm:gap-6 overflow-x-auto scrollbar-hide flex-1 min-w-0">
-  {[
-    { name: "Home", path: "/" },
-    { name: "Fresh Products", path: "/fresh-products" },
-    { name: "Kitchen Essentials", path: "/kitchen-essentials" },
-    { name: "Spices & Dry Fruits", path: "/spices-dry-fruits" },
-    { name: "Dairy & Snacks", path: "/dairy-snacks" },
-  ].map((cat) => (
-    <NavLink
-      key={cat.name}
-      to={cat.path}
-      className={({ isActive }) =>
-        `inline-block whitespace-nowrap shrink-0 text-[10px] sm:text-sm font-medium transition-colors pb-1 ${
-          isActive
-            ? "text-green-700 font-semibold border-b-2 border-orange-300"
-            : "text-gray-600 hover:text-green-700"
-        }`
-      }
-    >
-      {cat.name}
-    </NavLink>
-  ))}
-</div>
+            {/* Category links - Only product categories here */}
+            <div className="flex flex-nowrap items-center gap-3 sm:gap-6 overflow-x-auto scrollbar-hide flex-1 min-w-0">
+              {[
+                { name: "Home", path: "/" },
+                { name: "Fresh Products", path: "/fresh-products" },
+                { name: "Kitchen Essentials", path: "/kitchen-essentials" },
+                { name: "Spices & Dry Fruits", path: "/spices-dry-fruits" },
+                { name: "Dairy & Snacks", path: "/dairy-snacks" },
+              ].map((cat) => (
+                <NavLink
+                  key={cat.name}
+                  to={cat.path}
+                  className={({ isActive }) =>
+                    `inline-block whitespace-nowrap shrink-0 text-[10px] sm:text-sm font-medium transition-colors pb-1 ${
+                      isActive
+                        ? "text-green-700 font-semibold border-b-2 border-orange-300"
+                        : "text-gray-600 hover:text-green-700"
+                    }`
+                  }
+                >
+                  {cat.name}
+                </NavLink>
+              ))}
+            </div>
 
-      <span className="hidden lg:inline-block text-xs sm:text-sm font-medium text-green-700 bg-green-50 px-2 sm:px-3 py-1 rounded-full whitespace-nowrap">
-        🌿 Organic Store
-      </span>
-    </div>
-  </div>
-</nav>
+            <span className="hidden lg:inline-block text-xs sm:text-sm font-medium text-green-700 bg-green-50 px-2 sm:px-3 py-1 rounded-full whitespace-nowrap">
+              🌿 Organic Store
+            </span>
+          </div>
+        </div>
+      </nav>
 
-      {/* Mobile Sidebar with Blur Background */}
+      {/* Mobile Sidebar - Added About and Contact */}
       {isSidebarOpen && (
         <>
-          {/* Overlay with blur effect */}
           <div
             className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 sm:hidden animate-in fade-in duration-300"
             onClick={closeSidebar}
           />
 
-          {/* Sidebar */}
           <div className="fixed top-0 left-0 h-full w-80 bg-white shadow-2xl z-50 sm:hidden transform transition-transform duration-300 ease-in-out animate-in slide-in-from-left">
-            {/* Sidebar Header with Back Button */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200">
               <div className="flex items-center gap-3">
                 <button
@@ -585,7 +584,6 @@ export default function Header() {
               </button>
             </div>
 
-            {/* Sidebar Content */}
             <div className="p-4 overflow-y-auto h-[calc(100%-80px)]">
               {/* User Info */}
               <div className="mb-6 p-3 bg-gradient-to-r from-green-50 to-orange-50 rounded-lg">
@@ -638,7 +636,7 @@ export default function Header() {
                 </div>
               </div>
 
-              {/* Quick Links */}
+              {/* Quick Links - Added About and Contact here */}
               <div className="border-t border-gray-200 pt-4">
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
                   Quick Links
@@ -652,6 +650,27 @@ export default function Header() {
                     <Tag className="w-5 h-5 text-orange-500" />
                     <span className="text-sm">Offers & Deals</span>
                   </Link>
+                  
+                  {/* NEW: About Link */}
+                  <Link
+                    to="/about"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 transition-colors"
+                    onClick={closeSidebar}
+                  >
+                    <Info className="w-5 h-5 text-blue-500" />
+                    <span className="text-sm">About Us</span>
+                  </Link>
+                  
+                  {/* NEW: Contact Link */}
+                  <Link
+                    to="/contact"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 transition-colors"
+                    onClick={closeSidebar}
+                  >
+                    <Phone className="w-5 h-5 text-purple-500" />
+                    <span className="text-sm">Contact Us</span>
+                  </Link>
+                  
                   <Link
                     to="/cart"
                     className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 transition-colors"
@@ -680,7 +699,6 @@ export default function Header() {
         </>
       )}
 
-      {/* Add scrollbar hide style */}
       <style>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;

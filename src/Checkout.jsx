@@ -453,7 +453,7 @@ const Checkout = () => {
 
   // Main Checkout
   return (
-    <div ref={mainContainerRef} className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-orange-50 pt-32 pb-12">
+    <div ref={mainContainerRef} className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-orange-50 pt-40 pb-12">
       <div className="w-auto mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
