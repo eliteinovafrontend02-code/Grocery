@@ -10,6 +10,7 @@ import KitchenEssentials from './Components/pages/KitchenEssentials';
 import SpicesAndDryFruits from './Components/pages/SpicesAndDryFruits';
 import DairyProductsAndSnacks from './Components/pages/DairyProductsAndSnacks';
 import About from './About';
+import Contact from './Contact';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/" element={<Home/>} />
         <Route path="/cart" element={<Cart/>} />
         <Route path="/about" element={<About/>} />
+         <Route path="/contact" element={<Contact/>} />
         <Route path="/checkout" element={<Checkout/>} />
 
         <Route path="/fresh-products" element={<FreshProducts/>} />
