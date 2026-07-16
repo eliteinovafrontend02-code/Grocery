@@ -11,6 +11,10 @@ import SpicesAndDryFruits from './Components/pages/SpicesAndDryFruits';
 import DairyProductsAndSnacks from './Components/pages/DairyProductsAndSnacks';
 import About from './About';
 import Contact from './Contact';
+import StockManagement from './StockManagement';
+import Login from './Login';
+
+
 
 const App = () => {
   return (
@@ -26,11 +30,16 @@ const App = () => {
         <Route path="/about" element={<About/>} />
          <Route path="/contact" element={<Contact/>} />
         <Route path="/checkout" element={<Checkout/>} />
+         <Route path="/stock-management" element={<StockManagement/>} />
+         <Route path="/login" element={<Login/>} />
 
         <Route path="/fresh-products" element={<FreshProducts/>} />
         <Route path="/kitchen-essentials" element={<KitchenEssentials/>} />
         <Route path="/spices-dry-fruits" element={<SpicesAndDryFruits/>} />
         <Route path="/dairy-snacks" element={<DairyProductsAndSnacks/>} />
+
+       
+        
 
        </Routes>
       </BrowserRouter>
