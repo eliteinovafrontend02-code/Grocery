@@ -17,7 +17,7 @@ export const products = [
      
      
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 20,
     description: "Crisp and juicy red apples, perfect for snacking or baking. Rich in fiber and vitamin C.",
@@ -39,7 +39,7 @@ export const products = [
       
      
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 20,
     description: "Ripe and sweet bananas, rich in potassium and natural energy. Perfect for breakfast.",
@@ -61,7 +61,7 @@ export const products = [
       
       
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 18,
     description: "Sweet and tangy oranges, packed with vitamin C. Great for juicing or eating fresh.",
@@ -83,7 +83,7 @@ export const products = [
       
      
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: false,
     discount: 22,
     description: "Juicy and sweet strawberries, perfect for desserts, smoothies, or fresh eating.",
@@ -127,7 +127,7 @@ export const products = [
      
      
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 25,
     description: "Sweet and aromatic Alphonso mangoes, king of fruits. Perfect for shakes and desserts.",
@@ -149,7 +149,7 @@ export const products = [
       "/fresh-products/Products/fp7_1.webp",
      
     ],
-    isOrganic: true,
+    isOrganic:false,
     inStock: true,
     discount: 11,
     description: "Fresh pomegranate seeds, rich in antioxidants. Great for salads and juicing.",
@@ -193,7 +193,7 @@ export const products = [
      
      
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 17,
     description: "Sweet and nutritious papaya, rich in enzymes. Great for digestion and skin health.",
@@ -239,7 +239,7 @@ export const products = [
       
   
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 22,
     description: "Fresh and nutritious spinach leaves, rich in iron. Great for salads and smoothies.",
@@ -283,7 +283,7 @@ export const products = [
      
     
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 20,
     description: "Fresh green broccoli, packed with nutrients. Perfect for stir-fries and steaming.",
@@ -327,7 +327,7 @@ export const products = [
       "/fresh-products/Products/fp15_1.webp",
       
     ],
-    isOrganic: true,
+    isOrganic:false,
     inStock: true,
     discount: 25,
     description: "Cool and refreshing cucumbers, great for salads, sandwiches, and detox water.",
@@ -371,7 +371,7 @@ export const products = [
       "/fresh-products/Products/fp17_1.webp",
       
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 21,
     description: "Fresh purple eggplants, perfect for curries, grilling, and Mediterranean dishes.",
@@ -417,7 +417,7 @@ export const products = [
       "/fresh-products/Products/fp19_1.webp",
      
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 22,
     description: "Exotic and vibrant dragon fruit, rich in antioxidants. Great for smoothie bowls.",
@@ -439,7 +439,7 @@ export const products = [
       "/fresh-products/Products/fp20_1.webp",
      
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 20,
     description: "Creamy and nutritious avocado, perfect for salads, toast, and guacamole.",
@@ -553,7 +553,7 @@ export const products = [
       "/fresh-products/Products/fp25_1.webp",
     
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 20,
     description: "Fresh coriander leaves, perfect for garnishing, chutneys, and curries.",
@@ -575,7 +575,7 @@ export const products = [
       "/fresh-products/Products/fp26_1.webp",
      
     ],
-    isOrganic: true,
+    isOrganic:false,
     inStock: true,
     discount: 17,
     description: "Fresh mint leaves, great for chutneys, tea, cocktails, and garnishing.",
@@ -596,7 +596,7 @@ export const products = [
       "/fresh-products/Products/fp27.webp",
     
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 25,
     description: "Fresh curry leaves, essential for South Indian cooking. Adds unique aroma.",
@@ -642,7 +642,7 @@ export const products = [
       "/fresh-products/Products/fp29_1.webp",
       
     ],
-    isOrganic: true,
+    isOrganic: false,
     inStock: true,
     discount: 20,
     description: "Fresh beetroots, rich in iron and antioxidants. Great for salads and juicing.",
@@ -664,7 +664,7 @@ export const products = [
       "/fresh-products/Products/fp30_1.webp",
       
     ],
-    isOrganic: true,
+    isOrganic:false,
     inStock: true,
     discount: 25,
     description: "Fresh green beans, crisp and tender. Great for stir-fries and steaming.",

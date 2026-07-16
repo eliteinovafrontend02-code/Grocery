@@ -13,6 +13,7 @@ import About from './About';
 import Contact from './Contact';
 import StockManagement from './StockManagement';
 import Login from './Login';
+import AdminDashboard from './Components/admin/AdminDashboard';
 
 
 
@@ -39,7 +40,7 @@ const App = () => {
         <Route path="/dairy-snacks" element={<DairyProductsAndSnacks/>} />
 
        
-        
+         <Route path="/admin" element={<AdminDashboard/>} />
 
        </Routes>
       </BrowserRouter>

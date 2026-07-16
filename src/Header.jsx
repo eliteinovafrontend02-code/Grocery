@@ -14,7 +14,9 @@ import {
   ArrowLeft,
   Info,
   Phone,
-  Package, // 👈 ADD THIS
+  Package,
+  Shield, 
+
 } from "lucide-react";
 import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 
@@ -381,9 +383,9 @@ export default function Header() {
             {renderSearchDropdown()}
           </div>
 
-          {/* Right icons - Added About, Contact and Stock Management */}
+          {/* Right icons - Added About, Contact and Admin/Stock Management */}
           <div className="flex items-center gap-3 sm:gap-5 ml-auto">
-            {/* Desktop: About, Contact and Stock Management Links */}
+            {/* Desktop: About, Contact and Admin/Stock Management Links */}
             <div className="hidden lg:flex items-center gap-4 border-r border-gray-200 pr-4">
               <NavLink
                 to="/about"
@@ -405,17 +407,22 @@ export default function Header() {
               >
                 Contact
               </NavLink>
-              {/* 👇 NEW: Stock Management Link */}
+              {/* 👇 Admin/Stock Management Link with Shield icon */}
               <NavLink
-                to="/stock-management"
+                to="/admin"
                 className={({ isActive }) =>
                   `flex items-center gap-1.5 text-sm font-medium transition-colors ${
-                    isActive ? "text-emerald-700" : "text-gray-600 hover:text-emerald-700"
+                    isActive 
+                      ? "text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full" 
+                      : "text-gray-600 hover:text-emerald-700 hover:bg-emerald-50 px-3 py-1 rounded-full"
                   }`
                 }
               >
-                <Package className="w-4 h-4" />
-                Stock
+                <Shield className="w-4 h-4" />
+                <span>Admin</span>
+                <span className="text-[10px] bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded-full ml-0.5">
+                  Stock
+                </span>
               </NavLink>
             </div>
 
@@ -533,7 +540,7 @@ export default function Header() {
               <span>All Categories</span>
             </NavLink>
 
-            {/* Category links */}
+            {/* Category links - Added Admin/Stock Management */}
             <div className="flex flex-nowrap items-center gap-3 sm:gap-6 overflow-x-auto scrollbar-hide flex-1 min-w-0">
               {[
                 { name: "Home", path: "/" },
@@ -541,8 +548,8 @@ export default function Header() {
                 { name: "Kitchen Essentials", path: "/kitchen-essentials" },
                 { name: "Spices & Dry Fruits", path: "/spices-dry-fruits" },
                 { name: "Dairy & Snacks", path: "/dairy-snacks" },
-                // 👇 NEW: Stock Management in category nav
-                { name: "📦 Stock", path: "/stock-management" },
+                // 👇 Admin/Stock Management in category nav with label
+                { name: "🔒 Admin", path: "/admin" },
               ].map((cat) => (
                 <NavLink
                   key={cat.name}
@@ -552,6 +559,8 @@ export default function Header() {
                       isActive
                         ? "text-green-700 font-semibold border-b-2 border-orange-300"
                         : "text-gray-600 hover:text-green-700"
+                    } ${
+                      cat.name.includes("Admin") ? "bg-orange-50 px-2 py-0.5 rounded-full" : ""
                     }`
                   }
                 >
@@ -567,7 +576,7 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile Sidebar - Added About, Contact and Stock Management */}
+      {/* Mobile Sidebar - Added Admin/Stock Management */}
       {isSidebarOpen && (
         <>
           <div
@@ -619,7 +628,7 @@ export default function Header() {
                 </div>
               </div>
 
-              {/* All Categories Section */}
+              {/* All Categories Section - Added Admin/Stock Management */}
               <div className="mb-6">
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
                   All Categories
@@ -631,8 +640,8 @@ export default function Header() {
                     { name: "Kitchen Essentials", path: "/kitchen-essentials", icon: "🍳" },
                     { name: "Spices & Dry Fruits", path: "/spices-dry-fruits", icon: "🌶️" },
                     { name: "Dairy & Snacks", path: "/dairy-snacks", icon: "🧀" },
-                    // 👇 NEW: Stock Management in sidebar
-                    { name: "📦 Stock Management", path: "/stock-management", icon: "📦" },
+                    // 👇 Admin/Stock Management in sidebar
+                    { name: "🔒 Admin (Stock)", path: "/stock-management", icon: "📦" },
                   ].map((cat) => (
                     <NavLink
                       key={cat.name}
@@ -643,7 +652,7 @@ export default function Header() {
                           isActive
                             ? "bg-green-50 text-green-700 font-semibold"
                             : "hover:bg-gray-50 text-gray-700"
-                        }`
+                        } ${cat.name.includes("Admin") ? "bg-orange-50/50" : ""}`
                       }
                     >
                       <span className="text-lg">{cat.icon}</span>
@@ -653,7 +662,7 @@ export default function Header() {
                 </div>
               </div>
 
-              {/* Quick Links */}
+              {/* Quick Links - Added Admin/Stock Management */}
               <div className="border-t border-gray-200 pt-4">
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
                   Quick Links
@@ -686,14 +695,17 @@ export default function Header() {
                     <span className="text-sm">Contact Us</span>
                   </Link>
                   
-                  {/* 👇 NEW: Stock Management in Quick Links */}
+                  {/* 👇 Admin/Stock Management in Quick Links */}
                   <Link
                     to="/stock-management"
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 transition-colors"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 transition-colors bg-orange-50/30"
                     onClick={closeSidebar}
                   >
-                    <Package className="w-5 h-5 text-emerald-600" />
-                    <span className="text-sm">Stock Management</span>
+                    <Shield className="w-5 h-5 text-emerald-600" />
+                    <span className="text-sm font-medium">🔒 Admin - Stock Management</span>
+                    <span className="text-[10px] bg-orange-200 text-orange-700 px-1.5 py-0.5 rounded-full ml-auto">
+                      Staff Only
+                    </span>
                   </Link>
                   
                   <Link
