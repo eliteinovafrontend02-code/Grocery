@@ -18,7 +18,7 @@ import {
 import DashboardOverview from './inventory/DashboardOverview';
 import ProductManagement from './inventory/ProductManagement';
 import CategoryManagement from './inventory/CategoryManagement';
-// import InventoryManagement from './inventory/InventoryManagement';
+import InventoryManagement from './inventory/InventoryManagement';
 // import SupplierManagement from './inventory/SupplierManagement';
 // import PurchaseManagement from './inventory/PurchaseManagement';
 // import OrderManagement from './inventory/OrderManagement';
@@ -85,7 +85,7 @@ const AdminDashboard = () => {
       case 'dashboard': return <DashboardOverview />;
       case 'products': return <ProductManagement />;
       case 'categories': return <CategoryManagement />;
-    //   case 'inventory': return <InventoryManagement />;
+      case 'inventory': return <InventoryManagement />;
     //   case 'suppliers': return <SupplierManagement />;
     //   case 'purchase': return <PurchaseManagement />;
     //   case 'orders': return <OrderManagement />;

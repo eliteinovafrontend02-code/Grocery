@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-  Plus, Search, Edit, Trash2, Eye, Filter, Grid, List,
-  Package, Upload, Download, Barcode, Tag, Image,
-  FileText, CheckCircle, AlertCircle, Sparkles,
+  Plus, Search, Edit, Trash2, Eye, Filter,
+  Package, Upload, Download, Barcode,
+  CheckCircle, AlertCircle, Sparkles,
   RefreshCw, Copy, Printer, Star, TrendingUp, X,
   Layers, Settings, Globe, Clock
 } from 'lucide-react';
@@ -18,7 +18,6 @@ const ProductManagement = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [viewMode, setViewMode] = useState('list');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -143,6 +142,7 @@ const ProductManagement = () => {
     return { status: 'in-stock', label: 'In Stock', color: 'green' };
   };
 
+  // ✅ ADD PRODUCT
   const handleAddProduct = () => {
     if (!productForm.name || !productForm.category || productForm.price <= 0) {
       alert('Please fill all required fields');
@@ -157,8 +157,7 @@ const ProductManagement = () => {
       stockQuantity: productForm.stock,
       sku: productForm.sku || `SKU-${String(Date.now()).slice(-4)}`,
       barcode: productForm.barcode || `BAR-${String(Date.now()).slice(-4)}`,
-      variants: productForm.variants || [],
-      image: ['/default-product.jpg']
+      variants: productForm.variants || []
     };
 
     const updated = [...products, newProduct];
@@ -169,6 +168,7 @@ const ProductManagement = () => {
     alert('✅ Product added successfully!');
   };
 
+  // ✅ EDIT PRODUCT
   const handleEditProduct = (product) => {
     setSelectedProduct(product);
     setProductForm({
@@ -198,6 +198,7 @@ const ProductManagement = () => {
     setShowEditModal(true);
   };
 
+  // ✅ UPDATE PRODUCT
   const handleUpdateProduct = () => {
     if (!selectedProduct) return;
     
@@ -221,6 +222,7 @@ const ProductManagement = () => {
     alert('✅ Product updated successfully!');
   };
 
+  // ✅ DELETE PRODUCT
   const handleDeleteProduct = (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       const updated = products.filter(p => p.id !== id);
@@ -230,6 +232,7 @@ const ProductManagement = () => {
     }
   };
 
+  // ✅ BULK DELETE
   const handleBulkDelete = () => {
     if (selectedIds.length === 0) return;
     if (window.confirm(`Delete ${selectedIds.length} products?`)) {
@@ -242,6 +245,7 @@ const ProductManagement = () => {
     }
   };
 
+  // ✅ BULK STATUS UPDATE
   const handleBulkStatusUpdate = (status) => {
     if (selectedIds.length === 0) return;
     const updated = products.map(p => {
@@ -256,6 +260,7 @@ const ProductManagement = () => {
     alert(`✅ ${selectedIds.length} products updated to ${status}!`);
   };
 
+  // ✅ EXPORT PRODUCTS
   const handleExportProducts = () => {
     const data = filteredProducts.map(p => ({
       Name: p.name,
@@ -284,6 +289,7 @@ const ProductManagement = () => {
     alert('📥 Products exported successfully!');
   };
 
+  // ✅ BULK IMPORT
   const handleBulkImport = () => {
     if (!bulkFile && !bulkData) {
       alert('Please select a file or paste data');
@@ -303,8 +309,7 @@ const ProductManagement = () => {
       stockQuantity: 0,
       status: 'active',
       sku: `SKU-IMP-${String(Date.now() + index).slice(-4)}`,
-      description: `Imported product: ${p.name}`,
-      image: ['/default-product.jpg']
+      description: `Imported product: ${p.name}`
     }));
 
     const updated = [...products, ...newProducts];
@@ -316,6 +321,7 @@ const ProductManagement = () => {
     alert(`✅ ${newProducts.length} products imported successfully!`);
   };
 
+  // ✅ GENERATE BARCODE
   const handleGenerateBarcode = (product) => {
     if (product.barcode) {
       alert(`📊 Barcode: ${product.barcode}\nProduct: ${product.name}`);
@@ -333,6 +339,7 @@ const ProductManagement = () => {
     }
   };
 
+  // ✅ UPDATE SEO
   const handleUpdateSEO = (product) => {
     setSelectedProduct(product);
     setProductForm({
@@ -363,6 +370,7 @@ const ProductManagement = () => {
     alert('✅ SEO settings updated successfully!');
   };
 
+  // ✅ ADD VARIANT
   const handleAddVariant = () => {
     const variantName = prompt('Enter variant name (e.g., 1kg, 500g, Large):');
     if (variantName) {
@@ -554,14 +562,35 @@ const ProductManagement = () => {
         </div>
       </div>
 
-      {/* ====== PRODUCT LIST VIEW (ONLY) ====== */}
+      {/* ====== PRODUCT LIST VIEW ======
+          NOTE: min-w reduced from 1200px -> 980px and cell padding tightened
+          (px-4 py-3 -> px-3 py-2.5, text-xs headers) so the whole table,
+          including the Actions column, fits inside a normal admin content
+          area (sidebar ~240px + content) without a horizontal scrollbar
+          on standard laptop/desktop widths. Apply this same pattern
+          (overflow-x-auto wrapper + tighter min-w + px-3 py-2.5 cells)
+          to your other admin tables (Inventory, Orders, Customers, etc.)
+          for a consistent look across the whole app. */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[1000px]">
+          <table className="w-full min-w-[880px] table-fixed">
+            <colgroup>
+              {isBulkMode && <col style={{ width: '36px' }} />}
+              <col style={{ width: '32px' }} />
+              <col style={{ width: '18%' }} />
+              <col style={{ width: '10%' }} />
+              <col style={{ width: '8%' }} />
+              <col style={{ width: '7%' }} />
+              <col style={{ width: '9%' }} />
+              <col style={{ width: '9%' }} />
+              <col style={{ width: '9%' }} />
+              <col style={{ width: '8%' }} />
+              <col style={{ width: '132px' }} />
+            </colgroup>
             <thead className="bg-gray-50 dark:bg-gray-700/50 border-b border-gray-100 dark:border-gray-700">
               <tr>
                 {isBulkMode && (
-                  <th className="px-4 py-3 text-left w-12">
+                  <th className="px-2 py-3 text-left">
                     <input
                       type="checkbox"
                       checked={selectedIds.length === filteredProducts.length && filteredProducts.length > 0}
@@ -570,22 +599,22 @@ const ProductManagement = () => {
                     />
                   </th>
                 )}
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">#</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Product Name</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Category</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Price</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Unit</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Stock</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">SKU</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Barcode</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Status</th>
-                <th className="px-4 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Actions</th>
+                <th className="px-2 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">#</th>
+                <th className="px-2 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Product</th>
+                <th className="px-2 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Category</th>
+                <th className="px-2 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Price</th>
+                <th className="px-2 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Unit</th>
+                <th className="px-2 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Stock</th>
+                <th className="px-2 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">SKU</th>
+                <th className="px-2 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Barcode</th>
+                <th className="px-2 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Status</th>
+                <th className="px-2 py-3 text-right text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Actions</th>
               </tr>
             </thead>
             <tbody>
               {filteredProducts.length === 0 ? (
                 <tr>
-                  <td colSpan={isBulkMode ? 11 : 10} className="px-4 py-8 text-center text-gray-400">
+                  <td colSpan={isBulkMode ? 11 : 10} className="px-3 py-8 text-center text-gray-400">
                     No products found
                   </td>
                 </tr>
@@ -595,7 +624,7 @@ const ProductManagement = () => {
                   return (
                     <tr key={`${product.source}-${product.id}`} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
                       {isBulkMode && (
-                        <td className="px-4 py-3">
+                        <td className="px-2 py-2.5">
                           <input
                             type="checkbox"
                             checked={selectedIds.includes(product.id)}
@@ -604,29 +633,35 @@ const ProductManagement = () => {
                           />
                         </td>
                       )}
-                      <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">{index + 1}</td>
-                      <td className="px-4 py-3">
-                        <span className="font-medium text-gray-800 dark:text-white hover:text-emerald-600 transition-colors cursor-pointer" onClick={() => setShowDetailModal(product)}>
+                      <td className="px-2 py-2.5 text-sm text-gray-500 dark:text-gray-400">{index + 1}</td>
+                      <td className="px-2 py-2.5 overflow-hidden">
+                        <span 
+                          className="font-medium text-sm text-gray-800 dark:text-white hover:text-emerald-600 transition-colors cursor-pointer block truncate"
+                          onClick={() => setShowDetailModal(product)}
+                          title={product.name}
+                        >
                           {product.name}
                         </span>
-                        {product.isOrganic && (
-                          <span className="ml-2 text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">🌿 Organic</span>
-                        )}
-                        {product.isPopular && (
-                          <span className="ml-1 text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">⭐ Popular</span>
-                        )}
-                        {product.isNew && (
-                          <span className="ml-1 text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">🆕 New</span>
-                        )}
-                        {product.discount > 0 && (
-                          <span className="ml-1 text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">{product.discount}% OFF</span>
-                        )}
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {product.isOrganic && (
+                            <span className="text-[10px] bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full">🌿</span>
+                          )}
+                          {product.isPopular && (
+                            <span className="text-[10px] bg-yellow-100 text-yellow-700 px-1.5 py-0.5 rounded-full">⭐</span>
+                          )}
+                          {product.isNew && (
+                            <span className="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">🆕</span>
+                          )}
+                          {product.discount > 0 && (
+                            <span className="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded-full whitespace-nowrap">{product.discount}% OFF</span>
+                          )}
+                        </div>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">{product.category}</td>
-                      <td className="px-4 py-3 text-sm font-semibold text-emerald-600 dark:text-emerald-400">₹{product.price}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">{product.unit}</td>
-                      <td className="px-4 py-3">
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                      <td className="px-2 py-2.5 text-sm text-gray-600 dark:text-gray-300 truncate" title={product.category}>{product.category}</td>
+                      <td className="px-2 py-2.5 text-sm font-semibold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">₹{product.price}</td>
+                      <td className="px-2 py-2.5 text-sm text-gray-600 dark:text-gray-300 truncate">{product.unit}</td>
+                      <td className="px-2 py-2.5">
+                        <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-medium whitespace-nowrap inline-block ${
                           stock.color === 'red' ? 'bg-red-100 text-red-700' :
                           stock.color === 'orange' ? 'bg-orange-100 text-orange-700' :
                           'bg-emerald-100 text-emerald-700'
@@ -634,58 +669,60 @@ const ProductManagement = () => {
                           {stock.label}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">{product.sku}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                      <td className="px-2 py-2.5 text-sm text-gray-600 dark:text-gray-300">
+                        <span className="font-mono text-xs text-emerald-600 whitespace-nowrap">{product.sku}</span>
+                      </td>
+                      <td className="px-2 py-2.5 text-sm text-gray-600 dark:text-gray-300">
                         <button 
                           onClick={() => handleGenerateBarcode(product)}
-                          className="text-emerald-600 hover:underline transition-colors text-xs"
+                          className="text-emerald-600 hover:underline transition-colors text-xs font-mono whitespace-nowrap"
                         >
                           {product.barcode || 'Generate'}
                         </button>
                       </td>
-                      <td className="px-4 py-3">
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                      <td className="px-2 py-2.5">
+                        <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-medium whitespace-nowrap inline-block ${
                           product.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
                         }`}>
                           {product.status}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-right">
-                        <div className="flex items-center justify-end gap-1">
+                      <td className="px-1 py-2.5 text-right">
+                        <div className="flex items-center justify-end gap-0.5">
                           <button 
                             onClick={() => setShowDetailModal(product)} 
-                            className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all hover:scale-110"
+                            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all"
                             title="View Details"
                           >
-                            <Eye className="w-4 h-4 text-gray-400 hover:text-emerald-600" />
+                            <Eye className="w-3.5 h-3.5 text-gray-400 hover:text-emerald-600" />
                           </button>
                           <button 
                             onClick={() => handleEditProduct(product)} 
-                            className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all hover:scale-110"
+                            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all"
                             title="Edit Product"
                           >
-                            <Edit className="w-4 h-4 text-gray-400 hover:text-emerald-600" />
+                            <Edit className="w-3.5 h-3.5 text-gray-400 hover:text-emerald-600" />
                           </button>
                           <button 
                             onClick={() => handleGenerateBarcode(product)} 
-                            className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all hover:scale-110"
+                            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all"
                             title="Generate Barcode"
                           >
-                            <Barcode className="w-4 h-4 text-gray-400 hover:text-emerald-600" />
+                            <Barcode className="w-3.5 h-3.5 text-gray-400 hover:text-emerald-600" />
                           </button>
                           <button 
                             onClick={() => handleUpdateSEO(product)} 
-                            className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all hover:scale-110"
+                            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all"
                             title="SEO Settings"
                           >
-                            <Globe className="w-4 h-4 text-gray-400 hover:text-emerald-600" />
+                            <Globe className="w-3.5 h-3.5 text-gray-400 hover:text-emerald-600" />
                           </button>
                           <button 
                             onClick={() => handleDeleteProduct(product.id)} 
-                            className="p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all hover:scale-110"
+                            className="p-1 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all"
                             title="Delete Product"
                           >
-                            <Trash2 className="w-4 h-4 text-gray-400 hover:text-red-600" />
+                            <Trash2 className="w-3.5 h-3.5 text-gray-400 hover:text-red-600" />
                           </button>
                         </div>
                       </td>
@@ -709,8 +746,8 @@ const ProductManagement = () => {
       {/* ====== ADD PRODUCT MODAL ====== */}
       {/* ============================================================ */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 mt-30">
-          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-3xl max-h-[80vh] flex flex-col overflow-hidden animate-fadeIn">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 mt-20">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-3xl max-h-[75vh] flex flex-col overflow-hidden animate-fadeIn">
             
             <div className="flex items-center justify-between p-6 pb-4 border-b border-gray-100 dark:border-gray-700 flex-shrink-0">
               <h3 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
@@ -963,8 +1000,8 @@ const ProductManagement = () => {
       {/* ====== EDIT PRODUCT MODAL ====== */}
       {/* ============================================================ */}
       {showEditModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 mt-30">
-          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-3xl max-h-[85vh] flex flex-col overflow-hidden animate-fadeIn">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 mt-20">
+          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-3xl max-h-[80vh] flex flex-col overflow-hidden animate-fadeIn">
             
             <div className="flex items-center justify-between p-6 pb-4 border-b border-gray-100 dark:border-gray-700 flex-shrink-0">
               <h3 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
@@ -1097,109 +1134,126 @@ const ProductManagement = () => {
         </div>
       )}
 
-      {/* ============================================================ */}
-      {/* ====== PRODUCT DETAIL MODAL ====== */}
-      {/* ============================================================ */}
-      {showDetailModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 mt-25">
-          <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 max-w-lg w-full shadow-2xl animate-fadeIn">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-gray-800 dark:text-white">Product Details</h3>
-              <button onClick={() => setShowDetailModal(null)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all hover:rotate-90">
-                <X className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-              </button>
-            </div>
+    {/* ============================================================ */}
+{/* ====== PRODUCT DETAIL MODAL (FIXED HEIGHT) ====== */}
+{/* ============================================================ */}
+{showDetailModal && (
+  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4 mt-16 sm:mt-30">
+    <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-sm sm:max-w-lg max-h-[85vh] sm:max-h-[80vh] overflow-hidden animate-fadeIn flex flex-col">
+      
+      {/* Fixed Header */}
+      <div className="flex items-center justify-between p-4 sm:p-6 pb-3 sm:pb-4 border-b border-gray-100 dark:border-gray-700 flex-shrink-0">
+        <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white">Product Details</h3>
+        <button 
+          onClick={() => setShowDetailModal(null)} 
+          className="p-1.5 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all hover:rotate-90"
+        >
+          <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-300" />
+        </button>
+      </div>
 
-            <div className="space-y-3">
-              <div className="flex items-center gap-4 p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
-                <div className="w-16 h-16 rounded-lg bg-gray-100 dark:bg-gray-700 overflow-hidden flex-shrink-0">
-                  <img 
-                    src={Array.isArray(showDetailModal.image) ? showDetailModal.image[0] : showDetailModal.image || '/default-product.jpg'} 
-                    alt={showDetailModal.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => { e.target.src = '/default-product.jpg'; }}
-                  />
-                </div>
-                <div>
-                  <h4 className="font-bold text-gray-800 dark:text-white">{showDetailModal.name}</h4>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">{showDetailModal.category}</p>
-                  <p className="text-lg font-bold text-emerald-600">₹{showDetailModal.price}</p>
-                  {showDetailModal.sku && <p className="text-xs text-gray-400">SKU: <span className="text-emerald-600">{showDetailModal.sku}</span></p>}
-                  {showDetailModal.barcode && <p className="text-xs text-gray-400">Barcode: <span className="text-emerald-600">{showDetailModal.barcode}</span></p>}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                <div className="p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
-                  <p className="text-gray-500 dark:text-gray-400">Unit</p>
-                  <p className="font-medium text-gray-800 dark:text-white">{showDetailModal.unit || 'N/A'}</p>
-                </div>
-                <div className="p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
-                  <p className="text-gray-500 dark:text-gray-400">Stock</p>
-                  <p className="font-medium text-gray-800 dark:text-white">{showDetailModal.stockQuantity || 0}</p>
-                </div>
-                <div className="p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
-                  <p className="text-gray-500 dark:text-gray-400">Status</p>
-                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                    showDetailModal.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
-                  }`}>
-                    {showDetailModal.status}
-                  </span>
-                </div>
-                <div className="p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
-                  <p className="text-gray-500 dark:text-gray-400">Discount</p>
-                  <p className="font-medium text-emerald-600">{showDetailModal.discount || 0}%</p>
-                </div>
-                <div className="p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl col-span-2">
-                  <p className="text-gray-500 dark:text-gray-400">Description</p>
-                  <p className="font-medium text-gray-800 dark:text-white text-sm">{showDetailModal.description || 'No description'}</p>
-                </div>
-                {showDetailModal.origin && (
-                  <div className="p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl col-span-2">
-                    <p className="text-gray-500 dark:text-gray-400">Origin</p>
-                    <p className="font-medium text-gray-800 dark:text-white">{showDetailModal.origin}</p>
-                  </div>
-                )}
-                {showDetailModal.variants && showDetailModal.variants.length > 0 && (
-                  <div className="p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl col-span-2">
-                    <p className="text-gray-500 dark:text-gray-400">Variants</p>
-                    <div className="flex flex-wrap gap-2 mt-1">
-                      {showDetailModal.variants.map((v, i) => (
-                        <span key={i} className="px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded-full text-xs">
-                          {v.name} - ₹{v.price}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {showDetailModal.seoTitle && (
-                  <div className="p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl col-span-2">
-                    <p className="text-gray-500 dark:text-gray-400">SEO Title</p>
-                    <p className="font-medium text-gray-800 dark:text-white text-sm">{showDetailModal.seoTitle}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="flex gap-3 mt-6">
-              <button
-                onClick={() => setShowDetailModal(null)}
-                className="flex-1 py-2.5 bg-emerald-600 text-white rounded-xl font-medium hover:bg-emerald-700 transition-all"
-              >
-                Close
-              </button>
-              <button
-                onClick={() => { setShowDetailModal(null); handleEditProduct(showDetailModal); }}
-                className="flex-1 py-2.5 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-all hover:scale-105"
-              >
-                <Edit className="w-4 h-4 inline mr-1" />
-                Edit
-              </button>
-            </div>
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+          <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Product Name</p>
+            <p className="font-medium text-xs sm:text-sm text-gray-800 dark:text-white break-words">{showDetailModal.name}</p>
           </div>
+          <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Category</p>
+            <p className="font-medium text-xs sm:text-sm text-gray-800 dark:text-white break-words">{showDetailModal.category}</p>
+          </div>
+          <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Price</p>
+            <p className="font-medium text-xs sm:text-sm text-emerald-600">₹{showDetailModal.price}</p>
+          </div>
+          <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Unit</p>
+            <p className="font-medium text-xs sm:text-sm text-gray-800 dark:text-white break-words">{showDetailModal.unit}</p>
+          </div>
+          <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Stock</p>
+            <p className="font-medium text-xs sm:text-sm text-gray-800 dark:text-white">{showDetailModal.stockQuantity || 0}</p>
+          </div>
+          <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Status</p>
+            <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-medium ${
+              showDetailModal.status === 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
+            }`}>
+              {showDetailModal.status}
+            </span>
+          </div>
+          <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">SKU</p>
+            <p className="font-mono text-[10px] sm:text-xs text-emerald-600 break-all">{showDetailModal.sku || 'N/A'}</p>
+          </div>
+          <div className="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Barcode</p>
+            <p className="font-mono text-[10px] sm:text-xs text-emerald-600 break-all">{showDetailModal.barcode || 'N/A'}</p>
+          </div>
+          
+          {showDetailModal.description && (
+            <div className="sm:col-span-2 p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+              <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Description</p>
+              <p className="font-medium text-xs sm:text-sm text-gray-800 dark:text-white break-words">{showDetailModal.description}</p>
+            </div>
+          )}
+          
+          {showDetailModal.origin && (
+            <div className="sm:col-span-2 p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+              <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Origin</p>
+              <p className="font-medium text-xs sm:text-sm text-gray-800 dark:text-white break-words">{showDetailModal.origin}</p>
+            </div>
+          )}
+          
+          {showDetailModal.discount > 0 && (
+            <div className="sm:col-span-2 p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+              <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Discount</p>
+              <p className="font-medium text-xs sm:text-sm text-emerald-600">{showDetailModal.discount}% OFF</p>
+            </div>
+          )}
+          
+          {showDetailModal.variants && showDetailModal.variants.length > 0 && (
+            <div className="sm:col-span-2 p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+              <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">Variants</p>
+              <div className="flex flex-wrap gap-1 sm:gap-2 mt-1">
+                {showDetailModal.variants.map((v, i) => (
+                  <span key={i} className="px-1.5 sm:px-2 py-0.5 bg-gray-200 dark:bg-gray-600 rounded-full text-[10px] sm:text-xs">
+                    {v.name} - ₹{v.price}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {showDetailModal.seoTitle && (
+            <div className="sm:col-span-2 p-2 sm:p-3 bg-gray-50 dark:bg-gray-700/30 rounded-xl">
+              <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">SEO Title</p>
+              <p className="font-medium text-xs sm:text-sm text-gray-800 dark:text-white break-words">{showDetailModal.seoTitle}</p>
+            </div>
+          )}
         </div>
-      )}
+      </div>
 
+      {/* Fixed Footer */}
+      <div className="flex gap-2 sm:gap-3 p-4 sm:p-6 pt-3 sm:pt-4 border-t border-gray-100 dark:border-gray-700 flex-shrink-0">
+        <button
+          onClick={() => setShowDetailModal(null)}
+          className="flex-1 py-2 sm:py-2.5 text-sm bg-emerald-600 text-white rounded-xl font-medium hover:bg-emerald-700 transition-all"
+        >
+          Close
+        </button>
+        <button
+          onClick={() => { setShowDetailModal(null); handleEditProduct(showDetailModal); }}
+          className="flex-1 py-2 sm:py-2.5 text-sm bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-all hover:scale-105"
+        >
+          <Edit className="w-3 h-3 sm:w-4 sm:h-4 inline mr-1" />
+          Edit
+        </button>
+      </div>
+    </div>
+  </div>
+)}
       {/* ============================================================ */}
       {/* ====== SEO SETTINGS MODAL ====== */}
       {/* ============================================================ */}
